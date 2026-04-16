@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PM Workflow - AI Tools Flowchart</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    color: #fff;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    background: linear-gradient(90deg, #f093fb, #f5576c, #4facfe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .subtitle {
+    font-size: 1rem;
+    color: #aaa;
+    margin-bottom: 48px;
+  }
+
+  .timeline {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    position: relative;
+    max-width: 1200px;
+    width: 100%;
+  }
+
+  /* Connector arrows */
+  .connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    padding-top: 80px;
+  }
+  .connector svg { filter: drop-shadow(0 0 6px rgba(255,255,255,0.3)); }
+
+  /* Phase card */
+  .phase {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .phase-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    color: #fff;
+  }
+  .phase:nth-child(1) .phase-label { background: linear-gradient(135deg, #f093fb, #f5576c); }
+  .phase:nth-child(3) .phase-label { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+  .phase:nth-child(5) .phase-label { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+
+  .card {
+    width: 100%;
+    border-radius: 20px;
+    padding: 28px 22px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  .phase:nth-child(1) .card {
+    background: linear-gradient(145deg, rgba(240,147,251,0.15), rgba(245,87,108,0.1));
+    border: 1px solid rgba(240,147,251,0.3);
+  }
+  .phase:nth-child(3) .card {
+    background: linear-gradient(145deg, rgba(79,172,254,0.15), rgba(0,242,254,0.1));
+    border: 1px solid rgba(79,172,254,0.3);
+  }
+  .phase:nth-child(5) .card {
+    background: linear-gradient(145deg, rgba(67,233,123,0.15), rgba(56,249,215,0.1));
+    border: 1px solid rgba(67,233,123,0.3);
+  }
+
+  .card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .card-project {
+    font-size: 0.78rem;
+    color: #aaa;
+    margin-bottom: 14px;
+    font-family: monospace;
+  }
+
+  .card-desc {
+    font-size: 0.88rem;
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+
+  /* Section headers inside card */
+  .section-header {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    text-align: left;
+  }
+  .phase:nth-child(1) .section-header { color: #f093fb; border-bottom: 1px solid rgba(240,147,251,0.2); }
+  .phase:nth-child(3) .section-header { color: #4facfe; border-bottom: 1px solid rgba(79,172,254,0.2); }
+  .phase:nth-child(5) .section-header { color: #43e97b; border-bottom: 1px solid rgba(67,233,123,0.2); }
+
+  .tasks {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .task {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: #ddd;
+    line-height: 1.4;
+  }
+  .task-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+  .phase:nth-child(1) .task-dot { background: #f093fb; }
+  .phase:nth-child(3) .task-dot { background: #4facfe; }
+  .phase:nth-child(5) .task-dot { background: #43e97b; }
+
+  /* Data source tags */
+  .data-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+    text-align: left;
+  }
+  .data-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .data-tag .tag-icon { font-size: 0.72rem; }
+
+  .tag-gdrive { background: rgba(66,133,244,0.2); color: #8ab4f8; border: 1px solid rgba(66,133,244,0.3); }
+  .tag-gdocs { background: rgba(25,103,210,0.2); color: #6da4f7; border: 1px solid rgba(25,103,210,0.3); }
+  .tag-jira { background: rgba(0,82,204,0.2); color: #579dff; border: 1px solid rgba(0,82,204,0.3); }
+  .tag-figma { background: rgba(162,89,255,0.2); color: #c4a0ff; border: 1px solid rgba(162,89,255,0.3); }
+  .tag-gchat { background: rgba(0,200,83,0.2); color: #69f0ae; border: 1px solid rgba(0,200,83,0.3); }
+  .tag-openspec { background: rgba(255,171,0,0.2); color: #ffd54f; border: 1px solid rgba(255,171,0,0.3); }
+  .tag-local { background: rgba(255,112,67,0.2); color: #ff8a65; border: 1px solid rgba(255,112,67,0.3); }
+  .tag-new { background: rgba(255,255,255,0.08); color: #fff; border: 1px dashed rgba(255,255,255,0.3); }
+
+  /* Bottom flow summary */
+  .flow-bar {
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 32px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    max-width: 1200px;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .flow-step {
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 10px;
+  }
+  .flow-step.s1 { background: rgba(240,147,251,0.2); color: #f093fb; }
+  .flow-step.s2 { background: rgba(79,172,254,0.2); color: #4facfe; }
+  .flow-step.s3 { background: rgba(67,233,123,0.2); color: #43e97b; }
+  .flow-arrow { color: #555; font-size: 1.2rem; }
+
+  /* Legend */
+  .legend {
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    max-width: 1200px;
+  }
+  .legend-item {
+    font-size: 0.72rem;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  @media (max-width: 768px) {
+    .timeline { flex-direction: column; align-items: center; }
+    .connector {
+      padding-top: 0;
+      min-width: unset;
+      min-height: 40px;
+      transform: rotate(90deg);
+    }
+    .phase { width: 100%; max-width: 400px; }
+  }
+</style>
+</head>
+<body>
+
+<h1>PM Workflow / AI 工具鏈</h1>
+<p class="subtitle">從提案到交付，三個 AI 專案貫穿 PM 工作的前、中、後</p>
+
+<div class="timeline">
+
+  <!-- Phase 1: Proposal -->
+  <div class="phase">
+    <div class="phase-label">前期 / Before</div>
+    <div class="card">
+      <div class="card-icon">📋</div>
+      <div class="card-title">Proposal Creator</div>
+      <div class="card-project">Proposal_Creator/</div>
+      <div class="card-desc">
+        專案提案階段<br>
+        從 Google Drive 讀取既有資料，產出客戶提案文件
+      </div>
+
+      <div class="section-header">資料來源 / Input</div>
+      <div class="data-tags">
+        <span class="data-tag tag-gdrive"><span class="tag-icon">📁</span> Google Drive</span>
+        <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs</span>
+        <span class="data-tag tag-local"><span class="tag-icon">💻</span> Local Codebase</span>
+      </div>
+      <div class="tasks">
+        <div class="task"><span class="task-dot"></span>搜尋 Drive 中的參考文件與歷史提案</div>
+        <div class="task"><span class="task-dot"></span>讀取既有 Google Docs 內容</div>
+        <div class="task"><span class="task-dot"></span>前端&amp;api定義/tms/ — TMS 前端 Codebase</div>
+        <div class="task"><span class="task-dot"></span>前端&amp;api定義/app/ — APP 前端 Codebase</div>
+        <div class="task"><span class="task-dot"></span>前端&amp;api定義/api定義/ — API 文件</div>
+      </div>
+
+      <div class="section-header">產出 / Output</div>
+      <div class="data-tags">
+        <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs</span>
+      </div>
+      <div class="tasks">
+        <div class="task"><span class="task-dot"></span>建立 / 編輯提案文件於 Google Docs</div>
+        <div class="task"><span class="task-dot"></span>定義專案範疇與時程</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="connector">
+    <svg width="48" height="24" viewBox="0 0 48 24">
+      <defs>
+        <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#f5576c;stop-opacity:0.8"/>
+          <stop offset="100%" style="stop-color:#4facfe;stop-opacity:0.8"/>
+        </linearGradient>
+      </defs>
+      <line x1="0" y1="12" x2="36" y2="12" stroke="url(#g1)" stroke-width="2"/>
+      <polygon points="36,6 48,12 36,18" fill="url(#g1)"/>
+    </svg>
+  </div>
+
+  <!-- Phase 2: Story & Spec -->
+  <div class="phase">
+    <div class="phase-label">中期 / During</div>
+    <div class="card">
+      <div class="card-icon">🔧</div>
+      <div class="card-title">Story & Spec Generator</div>
+      <div class="card-project">Story&amp;Spec_Generator/</div>
+      <div class="card-desc">
+        開發規劃階段<br>
+        從客戶文件拆分 User Story，建立 Jira Tickets
+      </div>
+
+      <div class="section-header">資料來源 / Input</div>
+      <div class="data-tags">
+        <span class="data-tag tag-gdrive"><span class="tag-icon">📁</span> Google Drive</span>
+        <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs (客製化需求)</span>
+        <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira Epics</span>
+        <span class="data-tag tag-figma"><span class="tag-icon">🎨</span> Figma</span>
+        <span class="data-tag tag-openspec"><span class="tag-icon">📐</span> OpenSpec</span>
+      </div>
+      <div class="tasks">
+        <div class="task"><span class="task-dot"></span>搜尋 Drive 客戶資料夾，讀取客製化功能表</div>
+        <div class="task"><span class="task-dot"></span>查詢 Jira 既有 Epic 作為 Parent</div>
+        <div class="task"><span class="task-dot"></span>參考 Figma 設計稿</div>
+        <div class="task"><span class="task-dot"></span>OpenSpec 產出結構化規格文件</div>
+      </div>
+
+      <div class="section-header">產出 / Output</div>
+      <div class="data-tags">
+        <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira Stories</span>
+        <span class="data-tag tag-openspec"><span class="tag-icon">📐</span> Product Spec</span>
+      </div>
+      <div class="tasks">
+        <div class="task"><span class="task-dot"></span>建立 Jira Story (含 AC / 描述)</div>
+        <div class="task"><span class="task-dot"></span>產出 Product Spec，寫入產品規格書</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="connector">
+    <svg width="48" height="24" viewBox="0 0 48 24">
+      <defs>
+        <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#4facfe;stop-opacity:0.8"/>
+          <stop offset="100%" style="stop-color:#43e97b;stop-opacity:0.8"/>
+        </linearGradient>
+      </defs>
+      <line x1="0" y1="12" x2="36" y2="12" stroke="url(#g2)" stroke-width="2"/>
+      <polygon points="36,6 48,12 36,18" fill="url(#g2)"/>
+    </svg>
+  </div>
+
+  <!-- Phase 3: Release Note -->
+  <div class="phase">
+    <div class="phase-label">後期 / After</div>
+    <div class="card">
+      <div class="card-icon">🚀</div>
+      <div class="card-title">TMS Release Note</div>
+      <div class="card-project">TMS_Release_Note/</div>
+      <div class="card-desc">
+        交付紀錄階段<br>
+        從 Jira Sprint 自動產出版本發佈說明
+      </div>
+
+      <div class="section-header">資料來源 / Input</div>
+      <div class="data-tags">
+        <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira (Open Sprint)</span>
+        <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs (歷史版本)</span>
+      </div>
+      <div class="tasks">
+        <div class="task"><span class="task-dot"></span>查詢 Jira DAAS 專案 Open Sprint Tickets</div>
+        <div class="task"><span class="task-dot"></span>讀取 Google Docs 歷史 Release Note 推算日期</div>
+        <div class="task"><span class="task-dot"></span>本地 draft.md 暫存供人工審閱</div>
+      </div>
+
+      <div class="section-header">產出 / Output</div>
+      <div class="data-tags">
+        <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs</span>
+      </div>
+      <div class="tasks">
+        <div class="task"><span class="task-dot"></span>格式化 Release Note 寫入 Google Docs</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Bottom summary bar -->
+<div class="flow-bar">
+  <span class="flow-step s1">Codebase + Docs → 提案</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step s2">Docs + Figma → Jira Stories</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step s3">Jira → Product Spec &amp; Release Note</span>
+</div>
+
+<!-- Legend -->
+<div class="legend">
+  <div class="legend-item"><span class="data-tag tag-gdrive" style="font-size:0.65rem;padding:2px 6px;">Google Drive</span></div>
+  <div class="legend-item"><span class="data-tag tag-gdocs" style="font-size:0.65rem;padding:2px 6px;">Google Docs</span></div>
+  <div class="legend-item"><span class="data-tag tag-jira" style="font-size:0.65rem;padding:2px 6px;">Jira</span></div>
+  <div class="legend-item"><span class="data-tag tag-figma" style="font-size:0.65rem;padding:2px 6px;">Figma</span></div>
+  <div class="legend-item"><span class="data-tag tag-openspec" style="font-size:0.65rem;padding:2px 6px;">OpenSpec</span></div>
+  <div class="legend-item"><span class="data-tag tag-gchat" style="font-size:0.65rem;padding:2px 6px;">Google Chat</span></div>
+  <div class="legend-item"><span class="data-tag tag-local" style="font-size:0.65rem;padding:2px 6px;">Local Codebase</span></div>
+</div>
+
+</body>
+</html>
