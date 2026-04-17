@@ -22,14 +22,24 @@
     margin-bottom: 8px;
     background: linear-gradient(90deg, #f093fb, #f5576c, #4facfe);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-align: center;
   }
   .subtitle {
     font-size: 1rem;
     color: #aaa;
     margin-bottom: 48px;
+    text-align: center;
   }
 
+  /* ======== View system ======== */
+  .view { display: none; width: 100%; flex-direction: column; align-items: center; }
+  .view.active { display: flex; }
+
+  /* ============================================================
+     OVERVIEW STYLES
+     ============================================================ */
   .timeline {
     display: flex;
     align-items: flex-start;
@@ -39,7 +49,6 @@
     width: 100%;
   }
 
-  /* Connector arrows */
   .connector {
     display: flex;
     flex-direction: column;
@@ -50,7 +59,6 @@
   }
   .connector svg { filter: drop-shadow(0 0 6px rgba(255,255,255,0.3)); }
 
-  /* Phase card */
   .phase {
     flex: 1;
     display: flex;
@@ -79,12 +87,25 @@
     text-align: center;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   .card:hover {
     transform: translateY(-6px);
     box-shadow: 0 20px 60px rgba(0,0,0,0.4);
   }
+  .card::after {
+    content: '👆 點擊查看細節';
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .card:hover::after { opacity: 1; }
 
   .phase:nth-child(1) .card {
     background: linear-gradient(145deg, rgba(240,147,251,0.15), rgba(245,87,108,0.1));
@@ -99,30 +120,11 @@
     border: 1px solid rgba(67,233,123,0.3);
   }
 
-  .card-icon {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-  }
-  .card-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .card-project {
-    font-size: 0.78rem;
-    color: #aaa;
-    margin-bottom: 14px;
-    font-family: monospace;
-  }
+  .card-icon { font-size: 2.5rem; margin-bottom: 10px; }
+  .card-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; }
+  .card-project { font-size: 0.78rem; color: #aaa; margin-bottom: 14px; font-family: monospace; }
+  .card-desc { font-size: 0.88rem; color: #ccc; line-height: 1.6; margin-bottom: 18px; }
 
-  .card-desc {
-    font-size: 0.88rem;
-    color: #ccc;
-    line-height: 1.6;
-    margin-bottom: 18px;
-  }
-
-  /* Section headers inside card */
   .section-header {
     font-size: 0.72rem;
     font-weight: 600;
@@ -137,12 +139,7 @@
   .phase:nth-child(3) .section-header { color: #4facfe; border-bottom: 1px solid rgba(79,172,254,0.2); }
   .phase:nth-child(5) .section-header { color: #43e97b; border-bottom: 1px solid rgba(67,233,123,0.2); }
 
-  .tasks {
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
+  .tasks { text-align: left; display: flex; flex-direction: column; gap: 6px; }
   .task {
     display: flex;
     align-items: flex-start;
@@ -151,18 +148,11 @@
     color: #ddd;
     line-height: 1.4;
   }
-  .task-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    margin-top: 5px;
-  }
+  .task-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
   .phase:nth-child(1) .task-dot { background: #f093fb; }
   .phase:nth-child(3) .task-dot { background: #4facfe; }
   .phase:nth-child(5) .task-dot { background: #43e97b; }
 
-  /* Data source tags */
   .data-tags {
     display: flex;
     flex-wrap: wrap;
@@ -189,8 +179,9 @@
   .tag-openspec { background: rgba(255,171,0,0.2); color: #ffd54f; border: 1px solid rgba(255,171,0,0.3); }
   .tag-local { background: rgba(255,112,67,0.2); color: #ff8a65; border: 1px solid rgba(255,112,67,0.3); }
   .tag-new { background: rgba(255,255,255,0.08); color: #fff; border: 1px dashed rgba(255,255,255,0.3); }
+  .tag-claude { background: rgba(233,109,67,0.2); color: #ffab91; border: 1px solid rgba(233,109,67,0.3); }
+  .tag-pm { background: rgba(255,171,0,0.18); color: #ffd54f; border: 1px solid rgba(255,171,0,0.3); }
 
-  /* Bottom flow summary */
   .flow-bar {
     margin-top: 48px;
     display: flex;
@@ -210,13 +201,15 @@
     font-weight: 600;
     padding: 8px 20px;
     border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
   }
+  .flow-step:hover { transform: translateY(-2px); opacity: 0.85; }
   .flow-step.s1 { background: rgba(240,147,251,0.2); color: #f093fb; }
   .flow-step.s2 { background: rgba(79,172,254,0.2); color: #4facfe; }
   .flow-step.s3 { background: rgba(67,233,123,0.2); color: #43e97b; }
   .flow-arrow { color: #555; font-size: 1.2rem; }
 
-  /* Legend */
   .legend {
     margin-top: 24px;
     display: flex;
@@ -233,6 +226,272 @@
     gap: 4px;
   }
 
+  /* ============================================================
+     DETAILED STYLES
+     ============================================================ */
+  .workflow {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    max-width: 1400px;
+    width: 100%;
+  }
+
+  .phase-block {
+    border-radius: 20px;
+    padding: 28px;
+    position: relative;
+    scroll-margin-top: 24px;
+  }
+  .phase-block.p1 {
+    background: linear-gradient(145deg, rgba(240,147,251,0.08), rgba(245,87,108,0.04));
+    border: 1px solid rgba(240,147,251,0.25);
+  }
+  .phase-block.p2 {
+    background: linear-gradient(145deg, rgba(79,172,254,0.08), rgba(0,242,254,0.04));
+    border: 1px solid rgba(79,172,254,0.25);
+  }
+  .phase-block.p3 {
+    background: linear-gradient(145deg, rgba(67,233,123,0.08), rgba(56,249,215,0.04));
+    border: 1px solid rgba(67,233,123,0.25);
+  }
+
+  .phase-block-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .phase-badge {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    color: #fff;
+  }
+  .p1 .phase-badge { background: linear-gradient(135deg, #f093fb, #f5576c); }
+  .p2 .phase-badge { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+  .p3 .phase-badge { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+
+  .phase-icon-lg { font-size: 2rem; }
+  .phase-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  .phase-project {
+    font-size: 0.8rem;
+    color: #aaa;
+    font-family: monospace;
+    margin-left: auto;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    position: relative;
+  }
+
+  .step {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 16px 14px;
+    position: relative;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .step:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+  }
+  .p1 .step:hover { border-color: rgba(240,147,251,0.5); }
+  .p2 .step:hover { border-color: rgba(79,172,254,0.5); }
+  .p3 .step:hover { border-color: rgba(67,233,123,0.5); }
+
+  .step-num {
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  .p1 .step-num { background: linear-gradient(135deg, #f093fb, #f5576c); }
+  .p2 .step-num { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+  .p3 .step-num { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+
+  .step-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    color: #fff;
+  }
+  .step-desc {
+    font-size: 0.78rem;
+    color: #bbb;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .step-actor {
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+  .actor-ai { background: rgba(162,89,255,0.18); color: #c4a0ff; border: 1px solid rgba(162,89,255,0.3); }
+  .actor-pm { background: rgba(255,171,0,0.18); color: #ffd54f; border: 1px solid rgba(255,171,0,0.3); }
+  .actor-both { background: rgba(79,172,254,0.18); color: #8ab4f8; border: 1px solid rgba(79,172,254,0.3); }
+
+  .step-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 8px;
+  }
+  .step-tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  /* Bridge between Phase 2A and 2B */
+  .bridge {
+    margin: 8px auto;
+    max-width: 1400px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 28px;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(255,171,0,0.05),
+      rgba(255,171,0,0.05) 10px,
+      rgba(255,171,0,0.1) 10px,
+      rgba(255,171,0,0.1) 20px
+    );
+    border: 1px dashed rgba(255,171,0,0.4);
+    border-radius: 16px;
+  }
+  .bridge-icon {
+    font-size: 2rem;
+    animation: spin 6s linear infinite;
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .bridge-content { flex: 1; }
+  .bridge-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffd54f;
+    margin-bottom: 6px;
+  }
+  .bridge-desc {
+    font-size: 0.82rem;
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+  .bridge-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .phase-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0;
+  }
+  .phase-arrow svg { filter: drop-shadow(0 0 8px rgba(255,255,255,0.2)); }
+
+  .summary {
+    margin-top: 48px;
+    display: flex;
+    gap: 24px;
+    max-width: 1400px;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .summary-card {
+    flex: 1;
+    min-width: 280px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .summary-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .summary-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .summary-list li {
+    font-size: 0.8rem;
+    color: #ccc;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .summary-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #888;
+  }
+
+  /* Back button */
+  .back-btn {
+    align-self: flex-start;
+    margin-bottom: 24px;
+    font-size: 0.9rem;
+    color: #ccc;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .back-btn:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.4);
+  }
+
   @media (max-width: 768px) {
     .timeline { flex-direction: column; align-items: center; }
     .connector {
@@ -242,174 +501,588 @@
       transform: rotate(90deg);
     }
     .phase { width: 100%; max-width: 400px; }
+    .steps { grid-template-columns: 1fr; }
+    .phase-project { margin-left: 0; width: 100%; }
   }
 </style>
 </head>
 <body>
 
-<h1>PM Workflow / AI 工具鏈</h1>
-<p class="subtitle">從提案到交付，三個 AI 專案貫穿 PM 工作的前、中、後</p>
+<!-- ============================================================
+     VIEW 1: OVERVIEW
+     ============================================================ -->
+<div id="overview-view" class="view active">
+  <h1>PM Workflow / AI 工具鏈</h1>
+  <p class="subtitle">從提案到交付，三個 AI 專案貫穿 PM 工作的前、中、後 · 點擊卡片查看詳細流程</p>
 
-<div class="timeline">
+  <div class="timeline">
 
-  <!-- Phase 1: Proposal -->
-  <div class="phase">
-    <div class="phase-label">前期 / Before</div>
-    <div class="card">
-      <div class="card-icon">📋</div>
-      <div class="card-title">Proposal Creator</div>
-      <div class="card-project">Proposal_Creator/</div>
-      <div class="card-desc">
-        專案提案階段<br>
-        從 Google Drive 讀取既有資料，產出客戶提案文件
-      </div>
+    <!-- Phase 1: Proposal -->
+    <div class="phase">
+      <div class="phase-label">前期 / Before</div>
+      <div class="card" data-target="phase-1">
+        <div class="card-icon">📋</div>
+        <div class="card-title">Proposal Creator</div>
+        <div class="card-project">Proposal_Creator/</div>
+        <div class="card-desc">
+          專案提案階段<br>
+          從 Google Drive 讀取既有資料，產出客戶提案文件
+        </div>
 
-      <div class="section-header">資料來源 / Input</div>
-      <div class="data-tags">
-        <span class="data-tag tag-gdrive"><span class="tag-icon">📁</span> Google Drive</span>
-        <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs</span>
-        <span class="data-tag tag-local"><span class="tag-icon">💻</span> Local Codebase</span>
-      </div>
-      <div class="tasks">
-        <div class="task"><span class="task-dot"></span>搜尋 Drive 中的參考文件與歷史提案</div>
-        <div class="task"><span class="task-dot"></span>讀取既有 Google Docs 內容</div>
-        <div class="task"><span class="task-dot"></span>前端&amp;api定義/tms/ — TMS 前端 Codebase</div>
-        <div class="task"><span class="task-dot"></span>前端&amp;api定義/app/ — APP 前端 Codebase</div>
-        <div class="task"><span class="task-dot"></span>前端&amp;api定義/api定義/ — API 文件</div>
-      </div>
+        <div class="section-header">資料來源 / Input</div>
+        <div class="data-tags">
+          <span class="data-tag tag-gdrive"><span class="tag-icon">📁</span> Google Drive</span>
+          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs</span>
+          <span class="data-tag tag-local"><span class="tag-icon">💻</span> Local Codebase</span>
+        </div>
+        <div class="tasks">
+          <div class="task"><span class="task-dot"></span>搜尋 Drive 中的參考文件與歷史提案</div>
+          <div class="task"><span class="task-dot"></span>讀取既有 Google Docs 內容</div>
+          <div class="task"><span class="task-dot"></span>前端&amp;api定義/tms/ — TMS 前端 Codebase</div>
+          <div class="task"><span class="task-dot"></span>前端&amp;api定義/app/ — APP 前端 Codebase</div>
+          <div class="task"><span class="task-dot"></span>前端&amp;api定義/api定義/ — API 文件</div>
+        </div>
 
-      <div class="section-header">產出 / Output</div>
-      <div class="data-tags">
-        <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs</span>
-      </div>
-      <div class="tasks">
-        <div class="task"><span class="task-dot"></span>建立 / 編輯提案文件於 Google Docs</div>
-        <div class="task"><span class="task-dot"></span>定義專案範疇與時程</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Arrow -->
-  <div class="connector">
-    <svg width="48" height="24" viewBox="0 0 48 24">
-      <defs>
-        <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" style="stop-color:#f5576c;stop-opacity:0.8"/>
-          <stop offset="100%" style="stop-color:#4facfe;stop-opacity:0.8"/>
-        </linearGradient>
-      </defs>
-      <line x1="0" y1="12" x2="36" y2="12" stroke="url(#g1)" stroke-width="2"/>
-      <polygon points="36,6 48,12 36,18" fill="url(#g1)"/>
-    </svg>
-  </div>
-
-  <!-- Phase 2: Story & Spec -->
-  <div class="phase">
-    <div class="phase-label">中期 / During</div>
-    <div class="card">
-      <div class="card-icon">🔧</div>
-      <div class="card-title">Story & Spec Generator</div>
-      <div class="card-project">Story&amp;Spec_Generator/</div>
-      <div class="card-desc">
-        開發規劃階段<br>
-        從客戶文件拆分 User Story，建立 Jira Tickets
-      </div>
-
-      <div class="section-header">資料來源 / Input</div>
-      <div class="data-tags">
-        <span class="data-tag tag-gdrive"><span class="tag-icon">📁</span> Google Drive</span>
-        <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs (客製化需求)</span>
-        <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira Epics</span>
-        <span class="data-tag tag-figma"><span class="tag-icon">🎨</span> Figma</span>
-        <span class="data-tag tag-openspec"><span class="tag-icon">📐</span> OpenSpec</span>
-      </div>
-      <div class="tasks">
-        <div class="task"><span class="task-dot"></span>搜尋 Drive 客戶資料夾，讀取客製化功能表</div>
-        <div class="task"><span class="task-dot"></span>查詢 Jira 既有 Epic 作為 Parent</div>
-        <div class="task"><span class="task-dot"></span>參考 Figma 設計稿</div>
-        <div class="task"><span class="task-dot"></span>OpenSpec 產出結構化規格文件</div>
-      </div>
-
-      <div class="section-header">產出 / Output</div>
-      <div class="data-tags">
-        <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira Stories</span>
-        <span class="data-tag tag-openspec"><span class="tag-icon">📐</span> Product Spec</span>
-      </div>
-      <div class="tasks">
-        <div class="task"><span class="task-dot"></span>建立 Jira Story (含 AC / 描述)</div>
-        <div class="task"><span class="task-dot"></span>產出 Product Spec，寫入產品規格書</div>
+        <div class="section-header">產出 / Output</div>
+        <div class="data-tags">
+          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs</span>
+        </div>
+        <div class="tasks">
+          <div class="task"><span class="task-dot"></span>建立 / 編輯提案文件於 Google Docs</div>
+          <div class="task"><span class="task-dot"></span>定義專案範疇與時程</div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Arrow -->
-  <div class="connector">
-    <svg width="48" height="24" viewBox="0 0 48 24">
-      <defs>
-        <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" style="stop-color:#4facfe;stop-opacity:0.8"/>
-          <stop offset="100%" style="stop-color:#43e97b;stop-opacity:0.8"/>
-        </linearGradient>
-      </defs>
-      <line x1="0" y1="12" x2="36" y2="12" stroke="url(#g2)" stroke-width="2"/>
-      <polygon points="36,6 48,12 36,18" fill="url(#g2)"/>
-    </svg>
-  </div>
+    <div class="connector">
+      <svg width="48" height="24" viewBox="0 0 48 24">
+        <defs>
+          <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#f5576c;stop-opacity:0.8"/>
+            <stop offset="100%" style="stop-color:#4facfe;stop-opacity:0.8"/>
+          </linearGradient>
+        </defs>
+        <line x1="0" y1="12" x2="36" y2="12" stroke="url(#g1)" stroke-width="2"/>
+        <polygon points="36,6 48,12 36,18" fill="url(#g1)"/>
+      </svg>
+    </div>
 
-  <!-- Phase 3: Release Note -->
-  <div class="phase">
-    <div class="phase-label">後期 / After</div>
-    <div class="card">
-      <div class="card-icon">🚀</div>
-      <div class="card-title">TMS Release Note</div>
-      <div class="card-project">TMS_Release_Note/</div>
-      <div class="card-desc">
-        交付紀錄階段<br>
-        從 Jira Sprint 自動產出版本發佈說明
-      </div>
+    <!-- Phase 2: Story & Spec -->
+    <div class="phase">
+      <div class="phase-label">中期 / During</div>
+      <div class="card" data-target="phase-2a">
+        <div class="card-icon">🔧</div>
+        <div class="card-title">Story & Spec Generator</div>
+        <div class="card-project">Story&amp;Spec_Generator/</div>
+        <div class="card-desc">
+          開發規劃階段<br>
+          從客戶文件拆分 User Story，建立 Jira Tickets
+        </div>
 
-      <div class="section-header">資料來源 / Input</div>
-      <div class="data-tags">
-        <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira (Open Sprint)</span>
-        <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs (歷史版本)</span>
-      </div>
-      <div class="tasks">
-        <div class="task"><span class="task-dot"></span>查詢 Jira DAAS 專案 Open Sprint Tickets</div>
-        <div class="task"><span class="task-dot"></span>讀取 Google Docs 歷史 Release Note 推算日期</div>
-        <div class="task"><span class="task-dot"></span>本地 draft.md 暫存供人工審閱</div>
-      </div>
+        <div class="section-header">資料來源 / Input</div>
+        <div class="data-tags">
+          <span class="data-tag tag-gdrive"><span class="tag-icon">📁</span> Google Drive</span>
+          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs (客製化需求)</span>
+          <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira Epics</span>
+          <span class="data-tag tag-figma"><span class="tag-icon">🎨</span> Figma</span>
+          <span class="data-tag tag-openspec"><span class="tag-icon">📐</span> OpenSpec</span>
+        </div>
+        <div class="tasks">
+          <div class="task"><span class="task-dot"></span>搜尋 Drive 客戶資料夾，讀取客製化功能表</div>
+          <div class="task"><span class="task-dot"></span>查詢 Jira 既有 Epic 作為 Parent</div>
+          <div class="task"><span class="task-dot"></span>參考 Figma 設計稿</div>
+          <div class="task"><span class="task-dot"></span>OpenSpec 產出結構化規格文件</div>
+        </div>
 
-      <div class="section-header">產出 / Output</div>
-      <div class="data-tags">
-        <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs</span>
-      </div>
-      <div class="tasks">
-        <div class="task"><span class="task-dot"></span>格式化 Release Note 寫入 Google Docs</div>
+        <div class="section-header">產出 / Output</div>
+        <div class="data-tags">
+          <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira Stories</span>
+          <span class="data-tag tag-openspec"><span class="tag-icon">📐</span> Product Spec</span>
+        </div>
+        <div class="tasks">
+          <div class="task"><span class="task-dot"></span>建立 Jira Story (含 AC / 描述)</div>
+          <div class="task"><span class="task-dot"></span>Sprint 驗收後產出 Product Spec</div>
+        </div>
       </div>
     </div>
+
+    <div class="connector">
+      <svg width="48" height="24" viewBox="0 0 48 24">
+        <defs>
+          <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#4facfe;stop-opacity:0.8"/>
+            <stop offset="100%" style="stop-color:#43e97b;stop-opacity:0.8"/>
+          </linearGradient>
+        </defs>
+        <line x1="0" y1="12" x2="36" y2="12" stroke="url(#g2)" stroke-width="2"/>
+        <polygon points="36,6 48,12 36,18" fill="url(#g2)"/>
+      </svg>
+    </div>
+
+    <!-- Phase 3: Release Note -->
+    <div class="phase">
+      <div class="phase-label">後期 / After</div>
+      <div class="card" data-target="phase-3">
+        <div class="card-icon">🚀</div>
+        <div class="card-title">TMS Release Note</div>
+        <div class="card-project">TMS_Release_Note/</div>
+        <div class="card-desc">
+          交付紀錄階段<br>
+          從 Jira Sprint 自動產出版本發佈說明
+        </div>
+
+        <div class="section-header">資料來源 / Input</div>
+        <div class="data-tags">
+          <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira (Open Sprint)</span>
+          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs (歷史版本)</span>
+        </div>
+        <div class="tasks">
+          <div class="task"><span class="task-dot"></span>查詢 Jira DAAS 專案 Open Sprint Tickets</div>
+          <div class="task"><span class="task-dot"></span>讀取 Google Docs 歷史 Release Note 推算日期</div>
+          <div class="task"><span class="task-dot"></span>本地 draft.md 暫存供人工審閱</div>
+        </div>
+
+        <div class="section-header">產出 / Output</div>
+        <div class="data-tags">
+          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs</span>
+        </div>
+        <div class="tasks">
+          <div class="task"><span class="task-dot"></span>格式化 Release Note 寫入 Google Docs</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
+  <div class="flow-bar">
+    <span class="flow-step s1" data-target="phase-1">Codebase + Docs → 提案</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step s2" data-target="phase-2a">Docs + Figma → Jira Stories</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step s3" data-target="phase-3">Jira → Product Spec &amp; Release Note</span>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><span class="data-tag tag-gdrive" style="font-size:0.65rem;padding:2px 6px;">Google Drive</span></div>
+    <div class="legend-item"><span class="data-tag tag-gdocs" style="font-size:0.65rem;padding:2px 6px;">Google Docs</span></div>
+    <div class="legend-item"><span class="data-tag tag-jira" style="font-size:0.65rem;padding:2px 6px;">Jira</span></div>
+    <div class="legend-item"><span class="data-tag tag-figma" style="font-size:0.65rem;padding:2px 6px;">Figma</span></div>
+    <div class="legend-item"><span class="data-tag tag-openspec" style="font-size:0.65rem;padding:2px 6px;">OpenSpec</span></div>
+    <div class="legend-item"><span class="data-tag tag-gchat" style="font-size:0.65rem;padding:2px 6px;">Google Chat</span></div>
+    <div class="legend-item"><span class="data-tag tag-local" style="font-size:0.65rem;padding:2px 6px;">Local Codebase</span></div>
+  </div>
 </div>
 
-<!-- Bottom summary bar -->
-<div class="flow-bar">
-  <span class="flow-step s1">Codebase + Docs → 提案</span>
-  <span class="flow-arrow">→</span>
-  <span class="flow-step s2">Docs + Figma → Jira Stories</span>
-  <span class="flow-arrow">→</span>
-  <span class="flow-step s3">Jira → Product Spec &amp; Release Note</span>
+<!-- ============================================================
+     VIEW 2: DETAILED
+     ============================================================ -->
+<div id="detailed-view" class="view">
+  <div style="max-width:1400px; width:100%;">
+    <button class="back-btn" id="back-to-overview">← 回到三階段總覽</button>
+  </div>
+
+  <h1>PM Workflow / 詳細流程拆解</h1>
+  <p class="subtitle">三個 AI 專案 × 逐步操作細節 — 前期、中期、後期</p>
+
+  <div class="workflow">
+
+    <!-- PHASE 1 -->
+    <div class="phase-block p1" id="phase-1">
+      <div class="phase-block-header">
+        <div class="phase-icon-lg">📋</div>
+        <div>
+          <div class="phase-badge">前期 / Before — Proposal</div>
+          <div class="phase-title">Proposal Creator</div>
+        </div>
+        <div class="phase-project">Proposal_Creator/</div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-actor actor-pm">PM 輸入</div>
+          <div class="step-title">接收客戶需求</div>
+          <div class="step-desc">業務或客戶提出新專案需求，PM 彙整背景資訊與初步目標。</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">搜尋歷史提案</div>
+          <div class="step-desc">掃描 Drive 客戶資料夾，找出類似產業 / 客戶過往提案作參考。</div>
+          <div class="step-tags"><span class="step-tag tag-gdrive">📁 Drive</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">讀取既有文件</div>
+          <div class="step-desc">讀取 Google Docs 中現有的客戶資料、合約、會議紀錄等。</div>
+          <div class="step-tags"><span class="step-tag tag-gdocs">📄 Docs</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">掃描前端 Codebase</div>
+          <div class="step-desc">讀取 /tms/ 與 /app/ 原始碼，確認既有功能模組與可重用元件。</div>
+          <div class="step-tags">
+            <span class="step-tag tag-local">💻 tms/</span>
+            <span class="step-tag tag-local">💻 app/</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">解析 API 定義</div>
+          <div class="step-desc">讀取 /api定義/ 文件，比對客戶需求與現有 API 覆蓋範圍。</div>
+          <div class="step-tags"><span class="step-tag tag-local">💻 api定義/</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">產出提案草稿</div>
+          <div class="step-desc">依據客戶需求與既有資源，生成提案架構、範疇、時程與風險。</div>
+          <div class="step-tags"><span class="step-tag tag-claude">🤖 Claude</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">7</div>
+          <div class="step-actor actor-pm">PM 審閱</div>
+          <div class="step-title">人工修訂與調整</div>
+          <div class="step-desc">PM 檢視草稿、補上商業判斷與客戶洞察，調整用字與細節。</div>
+        </div>
+        <div class="step">
+          <div class="step-num">8</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">寫入 Google Docs</div>
+          <div class="step-desc">最終版本建立 / 更新至 Google Docs，分享給客戶與內部相關方。</div>
+          <div class="step-tags"><span class="step-tag tag-gdocs">📄 Docs</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-arrow">
+      <svg width="40" height="40" viewBox="0 0 40 40">
+        <defs>
+          <linearGradient id="arrow1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#f5576c;stop-opacity:0.9"/>
+            <stop offset="100%" style="stop-color:#4facfe;stop-opacity:0.9"/>
+          </linearGradient>
+        </defs>
+        <line x1="20" y1="4" x2="20" y2="30" stroke="url(#arrow1)" stroke-width="2.5"/>
+        <polygon points="12,28 20,38 28,28" fill="url(#arrow1)"/>
+      </svg>
+    </div>
+
+    <!-- PHASE 2A: Jira Story -->
+    <div class="phase-block p2" id="phase-2a">
+      <div class="phase-block-header">
+        <div class="phase-icon-lg">🎫</div>
+        <div>
+          <div class="phase-badge">中期 A / During — Jira Story</div>
+          <div class="phase-title">Story Generator (建立 Jira Story)</div>
+        </div>
+        <div class="phase-project">Story&Spec_Generator/ · Story</div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-actor actor-pm">PM 輸入</div>
+          <div class="step-title">提案通過 / 啟動開發</div>
+          <div class="step-desc">客戶簽約後，PM 開始將提案轉為可執行的 User Story。</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">搜尋客戶資料夾</div>
+          <div class="step-desc">至 Drive 定位該客戶專案資料夾，抓取客製化功能表。</div>
+          <div class="step-tags"><span class="step-tag tag-gdrive">📁 Drive</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">讀取客製化需求</div>
+          <div class="step-desc">讀取 Google Docs 客製化功能文件，擷取功能清單與接受準則。</div>
+          <div class="step-tags"><span class="step-tag tag-gdocs">📄 Docs</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">查詢 Jira Epic</div>
+          <div class="step-desc">於 Jira 中尋找既有 Epic，作為新 Story 的 Parent Ticket。</div>
+          <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">參考 Figma 設計稿</div>
+          <div class="step-desc">連動 Figma，讀取 UI 流程與畫面，補充至 Story 描述中。</div>
+          <div class="step-tags"><span class="step-tag tag-figma">🎨 Figma</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">拆分 User Story</div>
+          <div class="step-desc">以客戶功能為單位拆成多張 Story，產生 初版 AC、描述、估點建議。</div>
+          <div class="step-tags"><span class="step-tag tag-claude">🤖 Claude</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">7</div>
+          <div class="step-actor actor-pm">PM 審閱</div>
+          <div class="step-title">Story 初版驗收</div>
+          <div class="step-desc">PM 檢查 Story 切分是否合理、優先順序與初版 AC，補缺漏情境。</div>
+        </div>
+        <div class="step">
+          <div class="step-num">8</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">建立 Jira Stories</div>
+          <div class="step-desc">批次建立 Jira Story（掛在 Epic 底下），正式進入開發 Sprint。</div>
+          <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bridge -->
+    <div class="bridge">
+      <div class="bridge-icon">🔄</div>
+      <div class="bridge-content">
+        <div class="bridge-title">Sprint 開發過程 · AC 多次人工調整</div>
+        <div class="bridge-desc">
+          開發進行中，PM 會因實際情境、技術限制、客戶回饋等原因，多次手動修訂 Jira Story 的 AC 與描述。
+          待 Sprint 驗收完畢、AC 定稿後，才會啟動下一階段產出最終 Spec。
+        </div>
+        <div class="bridge-tags">
+          <span class="step-tag tag-jira">🎫 Jira Iteration</span>
+          <span class="step-tag tag-pm">🧑 PM 手動調整</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-arrow">
+      <svg width="40" height="40" viewBox="0 0 40 40">
+        <defs>
+          <linearGradient id="arrow1b" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#4facfe;stop-opacity:0.9"/>
+            <stop offset="100%" style="stop-color:#4facfe;stop-opacity:0.9"/>
+          </linearGradient>
+        </defs>
+        <line x1="20" y1="4" x2="20" y2="30" stroke="url(#arrow1b)" stroke-width="2.5"/>
+        <polygon points="12,28 20,38 28,28" fill="url(#arrow1b)"/>
+      </svg>
+    </div>
+
+    <!-- PHASE 2B: Spec -->
+    <div class="phase-block p2" id="phase-2b">
+      <div class="phase-block-header">
+        <div class="phase-icon-lg">📐</div>
+        <div>
+          <div class="phase-badge">中期 B / During — Product Spec</div>
+          <div class="phase-title">Spec Generator (建立 Product Spec)</div>
+        </div>
+        <div class="phase-project">Story&Spec_Generator/ · Spec</div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-actor actor-pm">PM 輸入</div>
+          <div class="step-title">Sprint 驗收完畢</div>
+          <div class="step-desc">開發完成、所有 Story 驗收通過，最終版 AC 已在 Jira 上定稿。</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">抓取最終 Jira Stories</div>
+          <div class="step-desc">重新讀取已驗收完成的 Jira Story（含 Sprint 中多次修訂後的 AC）。</div>
+          <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">比對 Figma 最終稿</div>
+          <div class="step-desc">同步最新 Figma UI，確保 Spec 畫面描述與實作一致。</div>
+          <div class="step-tags"><span class="step-tag tag-figma">🎨 Figma</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">OpenSpec 結構化</div>
+          <div class="step-desc">以 OpenSpec 標準格式整合 Stories + AC + Figma，輸出 Product Spec 草稿。</div>
+          <div class="step-tags">
+            <span class="step-tag tag-openspec">📐 OpenSpec</span>
+            <span class="step-tag tag-claude">🤖 Claude</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-actor actor-pm">PM 審閱</div>
+          <div class="step-title">Spec 內容檢查</div>
+          <div class="step-desc">PM 檢查 Spec 是否完整對應最終實作、補充說明與備註。</div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">寫入產品規格書</div>
+          <div class="step-desc">最終 Spec 歸檔至產品規格書（Google Docs / Confluence），供後續維護參考。</div>
+          <div class="step-tags">
+            <span class="step-tag tag-gdocs">📄 Docs</span>
+            <span class="step-tag tag-openspec">📐 Spec</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-arrow">
+      <svg width="40" height="40" viewBox="0 0 40 40">
+        <defs>
+          <linearGradient id="arrow2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#4facfe;stop-opacity:0.9"/>
+            <stop offset="100%" style="stop-color:#43e97b;stop-opacity:0.9"/>
+          </linearGradient>
+        </defs>
+        <line x1="20" y1="4" x2="20" y2="30" stroke="url(#arrow2)" stroke-width="2.5"/>
+        <polygon points="12,28 20,38 28,28" fill="url(#arrow2)"/>
+      </svg>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase-block p3" id="phase-3">
+      <div class="phase-block-header">
+        <div class="phase-icon-lg">🚀</div>
+        <div>
+          <div class="phase-badge">後期 / After — Release</div>
+          <div class="phase-title">TMS Release Note</div>
+        </div>
+        <div class="phase-project">TMS_Release_Note/</div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-actor actor-pm">PM 輸入</div>
+          <div class="step-title">Sprint 接近收尾</div>
+          <div class="step-desc">開發 Sprint 進入結束階段，準備整理本次版本的交付內容。</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">查詢 Open Sprint</div>
+          <div class="step-desc">連接 Jira DAAS 專案，撈取當前 Open Sprint 的所有 Tickets。</div>
+          <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">過濾已完成 Tickets</div>
+          <div class="step-desc">只保留 Done / Released 狀態，排除未完成或延至下期的項目。</div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">讀取歷史 Release Note</div>
+          <div class="step-desc">從 Google Docs 讀取前幾個版本的 Release Note，推算本次版號與日期。</div>
+          <div class="step-tags"><span class="step-tag tag-gdocs">📄 Docs</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">分類 Tickets</div>
+          <div class="step-desc">依 Feature / Enhancement / Bug Fix 分類，整理成 Release Note 結構。</div>
+          <div class="step-tags"><span class="step-tag tag-claude">🤖 Claude</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">產出 draft.md</div>
+          <div class="step-desc">將整理好的內容寫入本地 draft.md，供 PM 先行審閱。</div>
+          <div class="step-tags"><span class="step-tag tag-local">💻 draft.md</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">7</div>
+          <div class="step-actor actor-pm">PM 審閱</div>
+          <div class="step-title">人工調整用字</div>
+          <div class="step-desc">PM 調整客戶端可見的描述用字、補充重要公告或已知問題。</div>
+        </div>
+        <div class="step">
+          <div class="step-num">8</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">寫入 Google Docs</div>
+          <div class="step-desc">最終版本格式化後寫入 Google Docs Release Note 集中頁面。</div>
+          <div class="step-tags"><span class="step-tag tag-gdocs">📄 Docs</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">9</div>
+          <div class="step-actor actor-pm">PM 公告</div>
+          <div class="step-title">發佈給客戶 / 內部</div>
+          <div class="step-desc">透過 Google Chat 或 Email 通知客戶與內部團隊本次版本更新。</div>
+          <div class="step-tags"><span class="step-tag tag-gchat">💬 Chat</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="summary">
+    <div class="summary-card">
+      <div class="summary-title">🧑 PM 介入的關鍵節點</div>
+      <ul class="summary-list">
+        <li>接收客戶需求 → 啟動 Proposal</li>
+        <li>提案草稿 → 商業判斷修訂</li>
+        <li>Story 初版驗收 → 建立 Jira</li>
+        <li>Sprint 中 AC 多次人工調整（關鍵）</li>
+        <li>Sprint 驗收完 → Spec 內容檢查</li>
+        <li>Release Note → 用字調整與公告</li>
+      </ul>
+    </div>
+    <div class="summary-card">
+      <div class="summary-title">🤖 AI 自動化的重點範圍</div>
+      <ul class="summary-list">
+        <li>跨系統資料彙整（Drive、Jira、Figma）</li>
+        <li>Codebase 與 API 的一致性比對</li>
+        <li>結構化文件生成（Stories、Spec、Notes）</li>
+        <li>自動寫回 Jira / Google Docs</li>
+      </ul>
+    </div>
+    <div class="summary-card">
+      <div class="summary-title">🔄 四階段資料流向</div>
+      <ul class="summary-list">
+        <li>前期：Drive + Codebase → Docs 提案</li>
+        <li>中期 A：Docs + Figma → Jira Stories</li>
+        <li>Sprint：Jira AC 人工反覆調整</li>
+        <li>中期 B：定稿 Jira → Product Spec</li>
+        <li>後期：Jira Sprint → Docs Release Note</li>
+      </ul>
+    </div>
+  </div>
 </div>
 
-<!-- Legend -->
-<div class="legend">
-  <div class="legend-item"><span class="data-tag tag-gdrive" style="font-size:0.65rem;padding:2px 6px;">Google Drive</span></div>
-  <div class="legend-item"><span class="data-tag tag-gdocs" style="font-size:0.65rem;padding:2px 6px;">Google Docs</span></div>
-  <div class="legend-item"><span class="data-tag tag-jira" style="font-size:0.65rem;padding:2px 6px;">Jira</span></div>
-  <div class="legend-item"><span class="data-tag tag-figma" style="font-size:0.65rem;padding:2px 6px;">Figma</span></div>
-  <div class="legend-item"><span class="data-tag tag-openspec" style="font-size:0.65rem;padding:2px 6px;">OpenSpec</span></div>
-  <div class="legend-item"><span class="data-tag tag-gchat" style="font-size:0.65rem;padding:2px 6px;">Google Chat</span></div>
-  <div class="legend-item"><span class="data-tag tag-local" style="font-size:0.65rem;padding:2px 6px;">Local Codebase</span></div>
-</div>
+<script>
+  const overviewView = document.getElementById('overview-view');
+  const detailedView = document.getElementById('detailed-view');
+  const backBtn = document.getElementById('back-to-overview');
+
+  function showDetailed(targetId) {
+    overviewView.classList.remove('active');
+    detailedView.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    if (targetId) {
+      setTimeout(() => {
+        const el = document.getElementById(targetId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 30);
+    }
+  }
+
+  function showOverview() {
+    detailedView.classList.remove('active');
+    overviewView.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  document.querySelectorAll('[data-target]').forEach(el => {
+    el.addEventListener('click', () => showDetailed(el.dataset.target));
+  });
+
+  backBtn.addEventListener('click', showOverview);
+</script>
 
 </body>
 </html>
