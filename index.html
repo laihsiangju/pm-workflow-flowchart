@@ -645,9 +645,11 @@
         <div class="section-header">產出 / Output</div>
         <div class="data-tags">
           <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs</span>
+          <span class="data-tag tag-gchat"><span class="tag-icon">💬</span> Google Chat</span>
         </div>
         <div class="tasks">
           <div class="task"><span class="task-dot"></span>格式化 Release Note 寫入 Google Docs</div>
+          <div class="task"><span class="task-dot"></span>自動通知 Chat 群組，無需 PM 手動公告</div>
         </div>
       </div>
     </div>
@@ -1010,9 +1012,9 @@
         </div>
         <div class="step">
           <div class="step-num">9</div>
-          <div class="step-actor actor-pm">PM 公告</div>
-          <div class="step-title">發佈給客戶 / 內部</div>
-          <div class="step-desc">透過 Google Chat 或 Email 通知客戶與內部團隊本次版本更新。</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">自動通知 Chat 群組</div>
+          <div class="step-desc">Release Note 寫入 Google Docs 後，自動觸發訊息發送至 Google Chat 群組，通知客戶與內部團隊本次版本更新。</div>
           <div class="step-tags"><span class="step-tag tag-gchat">💬 Chat</span></div>
         </div>
       </div>
@@ -1029,7 +1031,7 @@
         <li>Story 初版驗收 → 建立 Jira</li>
         <li>Sprint 中 AC 多次人工調整（關鍵）</li>
         <li>Sprint 驗收完 → Spec 內容檢查</li>
-        <li>Release Note → 用字調整與公告</li>
+        <li>Release Note → 用字調整（公告已自動化）</li>
       </ul>
     </div>
     <div class="summary-card">
@@ -1039,6 +1041,7 @@
         <li>Codebase 與 API 的一致性比對</li>
         <li>結構化文件生成（Stories、Spec、Notes）</li>
         <li>自動寫回 Jira / Google Docs</li>
+        <li>Release Note 發佈後自動通知 Chat 群組</li>
       </ul>
     </div>
     <div class="summary-card">
