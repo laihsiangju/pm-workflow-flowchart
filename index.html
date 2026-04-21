@@ -525,31 +525,33 @@
         <div class="card-title">Proposal Creator</div>
         <div class="card-project">Proposal_Creator/</div>
         <div class="card-desc">
-          專案提案階段<br>
-          從 Google Drive 讀取既有資料，產出客戶提案文件
+          客戶提案階段<br>
+          需求探索、三方案產出、寫回合作案；可直接開 Jira Ticket
         </div>
 
         <div class="section-header">資料來源 / Input</div>
         <div class="data-tags">
           <span class="data-tag tag-gdrive"><span class="tag-icon">📁</span> Google Drive</span>
-          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs</span>
+          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> PRD Docs</span>
           <span class="data-tag tag-local"><span class="tag-icon">💻</span> Local Codebase</span>
         </div>
         <div class="tasks">
-          <div class="task"><span class="task-dot"></span>搜尋 Drive 中的參考文件與歷史提案</div>
-          <div class="task"><span class="task-dot"></span>讀取既有 Google Docs 內容</div>
-          <div class="task"><span class="task-dot"></span>前端&amp;api定義/tms/ — TMS 前端 Codebase</div>
-          <div class="task"><span class="task-dot"></span>前端&amp;api定義/app/ — APP 前端 Codebase</div>
-          <div class="task"><span class="task-dot"></span>前端&amp;api定義/api定義/ — API 文件</div>
+          <div class="task"><span class="task-dot"></span>PM 口頭輸入客戶需求（起點）</div>
+          <div class="task"><span class="task-dot"></span>讀客戶合作案（Drive）</div>
+          <div class="task"><span class="task-dot"></span>讀 TMS / App / InstaTMS PRD</div>
+          <div class="task"><span class="task-dot"></span>Agent 搜 Codebase 既有實作</div>
+          <div class="task"><span class="task-dot"></span>/brainstorm-proposal · /create-jira-ticket</div>
         </div>
 
         <div class="section-header">產出 / Output</div>
         <div class="data-tags">
-          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs</span>
+          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> 合作案 Doc</span>
+          <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira Story</span>
         </div>
         <div class="tasks">
-          <div class="task"><span class="task-dot"></span>建立 / 編輯提案文件於 Google Docs</div>
-          <div class="task"><span class="task-dot"></span>定義專案範疇與時程</div>
+          <div class="task"><span class="task-dot"></span>產品化 / 中間 / 暴力解 三方案</div>
+          <div class="task"><span class="task-dot"></span>用 Docs REST API 寫回合作案表格</div>
+          <div class="task"><span class="task-dot"></span>可直接將對話內容轉 Jira Story（ADF）</div>
         </div>
       </div>
     </div>
@@ -576,32 +578,33 @@
         <div class="card-project">Story&amp;Spec_Generator/</div>
         <div class="card-desc">
           開發規劃階段<br>
-          從客戶文件拆分 User Story，建立 Jira Tickets
+          從合作案產 Jira Story；從 Jira 回寫 PRD（單票 / Sprint 整批）
         </div>
 
         <div class="section-header">資料來源 / Input</div>
         <div class="data-tags">
           <span class="data-tag tag-gdrive"><span class="tag-icon">📁</span> Google Drive</span>
-          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs (客製化需求)</span>
-          <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira Epics</span>
-          <span class="data-tag tag-figma"><span class="tag-icon">🎨</span> Figma</span>
-          <span class="data-tag tag-openspec"><span class="tag-icon">📐</span> OpenSpec</span>
+          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> 合作案 Doc</span>
+          <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira Ticket / Sprint</span>
         </div>
         <div class="tasks">
-          <div class="task"><span class="task-dot"></span>搜尋 Drive 客戶資料夾，讀取客製化功能表</div>
-          <div class="task"><span class="task-dot"></span>查詢 Jira 既有 Epic 作為 Parent</div>
-          <div class="task"><span class="task-dot"></span>參考 Figma 設計稿</div>
-          <div class="task"><span class="task-dot"></span>OpenSpec 產出結構化規格文件</div>
+          <div class="task"><span class="task-dot"></span>skill: <code>generate-story</code>（Story）、<code>write-spec</code>（PRD）</div>
+          <div class="task"><span class="task-dot"></span>Story：Drive 抓合作案「客製化功能」表格</div>
+          <div class="task"><span class="task-dot"></span>Story：AC 層次化 bullet（4 層），不用 Given/When/Then</div>
+          <div class="task"><span class="task-dot"></span>Story：查現有 Epic 當 parent（判不出不帶）</div>
+          <div class="task"><span class="task-dot"></span>PRD 寫入：單票（DAAS-XXXX） 或 open sprint 整批</div>
+          <div class="task"><span class="task-dot"></span>PRD 寫入：依 [TMS]/[App]/[InstaTMS] tag 分流</div>
         </div>
 
         <div class="section-header">產出 / Output</div>
         <div class="data-tags">
-          <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira Stories</span>
-          <span class="data-tag tag-openspec"><span class="tag-icon">📐</span> Product Spec</span>
+          <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira Stories (ADF)</span>
+          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> PRD (TMS/App/InstaTMS)</span>
         </div>
         <div class="tasks">
-          <div class="task"><span class="task-dot"></span>建立 Jira Story (含 AC / 描述)</div>
-          <div class="task"><span class="task-dot"></span>Sprint 驗收後產出 Product Spec</div>
+          <div class="task"><span class="task-dot"></span>建 Jira Story，description 直接帶 ADF</div>
+          <div class="task"><span class="task-dot"></span>PRD 以 4 章節寫入（概述/價值/場景/功能列表）</div>
+          <div class="task"><span class="task-dot"></span>更新 Doc 頂部「版本紀錄檔案」表格</div>
         </div>
       </div>
     </div>
@@ -628,18 +631,19 @@
         <div class="card-project">TMS_Release_Note/</div>
         <div class="card-desc">
           交付紀錄階段<br>
-          從 Jira Sprint 自動產出版本發佈說明
+          從 Jira Sprint 自動產出 Release Note、寫入 Doc、通知 Chat
         </div>
 
         <div class="section-header">資料來源 / Input</div>
         <div class="data-tags">
-          <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira (Open Sprint)</span>
-          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Google Docs (歷史版本)</span>
+          <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira openSprints</span>
+          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Release Note Doc</span>
         </div>
         <div class="tasks">
-          <div class="task"><span class="task-dot"></span>查詢 Jira DAAS 專案 Open Sprint Tickets</div>
-          <div class="task"><span class="task-dot"></span>讀取 Google Docs 歷史 Release Note 推算日期</div>
-          <div class="task"><span class="task-dot"></span>本地 draft.md 暫存供人工審閱</div>
+          <div class="task"><span class="task-dot"></span>撈 openSprints tickets（完整分頁，過去漏過）</div>
+          <div class="task"><span class="task-dot"></span>只解析 Doc 頂部 HEADING_1 + 14 天推算日期</div>
+          <div class="task"><span class="task-dot"></span>draft.md 固定 4 header（TMS/APP × 新增/優化）</div>
+          <div class="task"><span class="task-dot"></span>撰寫風格固化（名稱精煉、價值導向）</div>
         </div>
 
         <div class="section-header">產出 / Output</div>
@@ -648,8 +652,8 @@
           <span class="data-tag tag-gchat"><span class="tag-icon">💬</span> Google Chat</span>
         </div>
         <div class="tasks">
-          <div class="task"><span class="task-dot"></span>格式化 Release Note 寫入 Google Docs</div>
-          <div class="task"><span class="task-dot"></span>自動通知 Chat 群組，無需 PM 手動公告</div>
+          <div class="task"><span class="task-dot"></span>write_to_gdoc.py 寫入（格式全在腳本內）</div>
+          <div class="task"><span class="task-dot"></span>自動通知 Chat（@all + Sprint 名 + 聚焦 + Doc link）</div>
         </div>
       </div>
     </div>
@@ -657,19 +661,17 @@
   </div>
 
   <div class="flow-bar">
-    <span class="flow-step s1" data-target="phase-1">Codebase + Docs → 提案</span>
+    <span class="flow-step s1" data-target="phase-1">需求 + 合作案 + Codebase → 三方案</span>
     <span class="flow-arrow">→</span>
-    <span class="flow-step s2" data-target="phase-2a">Docs + Figma → Jira Stories</span>
+    <span class="flow-step s2" data-target="phase-2a">合作案 → Jira Story → 回寫 PRD</span>
     <span class="flow-arrow">→</span>
-    <span class="flow-step s3" data-target="phase-3">Jira → Product Spec &amp; Release Note</span>
+    <span class="flow-step s3" data-target="phase-3">Sprint → Release Note + Chat 通知</span>
   </div>
 
   <div class="legend">
     <div class="legend-item"><span class="data-tag tag-gdrive" style="font-size:0.65rem;padding:2px 6px;">Google Drive</span></div>
     <div class="legend-item"><span class="data-tag tag-gdocs" style="font-size:0.65rem;padding:2px 6px;">Google Docs</span></div>
     <div class="legend-item"><span class="data-tag tag-jira" style="font-size:0.65rem;padding:2px 6px;">Jira</span></div>
-    <div class="legend-item"><span class="data-tag tag-figma" style="font-size:0.65rem;padding:2px 6px;">Figma</span></div>
-    <div class="legend-item"><span class="data-tag tag-openspec" style="font-size:0.65rem;padding:2px 6px;">OpenSpec</span></div>
     <div class="legend-item"><span class="data-tag tag-gchat" style="font-size:0.65rem;padding:2px 6px;">Google Chat</span></div>
     <div class="legend-item"><span class="data-tag tag-local" style="font-size:0.65rem;padding:2px 6px;">Local Codebase</span></div>
   </div>
@@ -696,66 +698,66 @@
           <div class="phase-badge">前期 / Before — Proposal</div>
           <div class="phase-title">Proposal Creator</div>
         </div>
-        <div class="phase-project">Proposal_Creator/</div>
+        <div class="phase-project">Proposal_Creator/ · /brainstorm-proposal</div>
       </div>
 
       <div class="steps">
         <div class="step">
           <div class="step-num">1</div>
           <div class="step-actor actor-pm">PM 輸入</div>
-          <div class="step-title">接收客戶需求</div>
-          <div class="step-desc">業務或客戶提出新專案需求，PM 彙整背景資訊與初步目標。</div>
+          <div class="step-title">PM 輸入客戶需求</div>
+          <div class="step-desc">口頭釐清客戶需求、討論範圍與方向，作為後續分析的起點。</div>
+          <div class="step-tags"><span class="step-tag tag-claude">💬 /brainstorm-proposal 客戶名稱</span></div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">搜尋歷史提案</div>
-          <div class="step-desc">掃描 Drive 客戶資料夾，找出類似產業 / 客戶過往提案作參考。</div>
-          <div class="step-tags"><span class="step-tag tag-gdrive">📁 Drive</span></div>
+          <div class="step-title">讀合作案 + PRD + Codebase（並行）</div>
+          <div class="step-desc">Drive 找「客戶名 + 合作案」文件、讀 TMS / App / InstaTMS PRD、用 Agent 搜 Codebase 既有實作。</div>
+          <div class="step-tags">
+            <span class="step-tag tag-gdrive">📁 Drive</span>
+            <span class="step-tag tag-gdocs">📄 Docs</span>
+            <span class="step-tag tag-local">💻 Codebase</span>
+          </div>
         </div>
         <div class="step">
           <div class="step-num">3</div>
-          <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">讀取既有文件</div>
-          <div class="step-desc">讀取 Google Docs 中現有的客戶資料、合約、會議紀錄等。</div>
-          <div class="step-tags"><span class="step-tag tag-gdocs">📄 Docs</span></div>
+          <div class="step-actor actor-both">AI + PM</div>
+          <div class="step-title">釐清需求（一次一題）</div>
+          <div class="step-desc">優先用選擇題、聚焦需求目的 / 限制條件 / 優先級。</div>
         </div>
         <div class="step">
           <div class="step-num">4</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">掃描前端 Codebase</div>
-          <div class="step-desc">讀取 /tms/ 與 /app/ 原始碼，確認既有功能模組與可重用元件。</div>
-          <div class="step-tags">
-            <span class="step-tag tag-local">💻 tms/</span>
-            <span class="step-tag tag-local">💻 app/</span>
-          </div>
+          <div class="step-title">需求合併 + 標註已有實作</div>
+          <div class="step-desc">區分「已完成（無需開發） / 可複用（部分開發） / 全新（從零開發）」。</div>
         </div>
         <div class="step">
           <div class="step-num">5</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">解析 API 定義</div>
-          <div class="step-desc">讀取 /api定義/ 文件，比對客戶需求與現有 API 覆蓋範圍。</div>
-          <div class="step-tags"><span class="step-tag tag-local">💻 api定義/</span></div>
-        </div>
-        <div class="step">
-          <div class="step-num">6</div>
-          <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">產出提案草稿</div>
-          <div class="step-desc">依據客戶需求與既有資源，生成提案架構、範疇、時程與風險。</div>
+          <div class="step-title">產出三方案</div>
+          <div class="step-desc">產品化 / 中間 / 暴力解，列出各方案描述與與現有功能的關係。</div>
           <div class="step-tags"><span class="step-tag tag-claude">🤖 Claude</span></div>
         </div>
         <div class="step">
-          <div class="step-num">7</div>
+          <div class="step-num">6</div>
           <div class="step-actor actor-pm">PM 審閱</div>
-          <div class="step-title">人工修訂與調整</div>
-          <div class="step-desc">PM 檢視草稿、補上商業判斷與客戶洞察，調整用字與細節。</div>
+          <div class="step-title">審核草稿、選定方案</div>
+          <div class="step-desc">PM 檢視三方案、選定後確認是否寫入合作案。</div>
         </div>
         <div class="step">
-          <div class="step-num">8</div>
+          <div class="step-num">7</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">寫入 Google Docs</div>
-          <div class="step-desc">最終版本建立 / 更新至 Google Docs，分享給客戶與內部相關方。</div>
-          <div class="step-tags"><span class="step-tag tag-gdocs">📄 Docs</span></div>
+          <div class="step-title">寫回合作案表格</div>
+          <div class="step-desc">用 Google Docs REST API + OAuth：<code>insertTableRow</code> 新增列，reverse index 填各欄位（非 MCP）。</div>
+          <div class="step-tags"><span class="step-tag tag-gdocs">📄 Docs API</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">＋</div>
+          <div class="step-actor actor-ai">旁支 skill</div>
+          <div class="step-title">/create-jira-ticket（可選）</div>
+          <div class="step-desc">對話內容即可直接轉 Jira Story：一次 call 建票、description 帶 ADF、AC 4 層 bullet。建票前列出 Story 等 PM 確認。</div>
+          <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira MCP</span></div>
         </div>
       </div>
     </div>
@@ -781,63 +783,60 @@
           <div class="phase-badge">中期 A / During — Jira Story</div>
           <div class="phase-title">Story Generator (建立 Jira Story)</div>
         </div>
-        <div class="phase-project">Story&Spec_Generator/ · Story</div>
+        <div class="phase-project">Story&Spec_Generator/ · generate-story</div>
       </div>
 
       <div class="steps">
         <div class="step">
           <div class="step-num">1</div>
           <div class="step-actor actor-pm">PM 輸入</div>
-          <div class="step-title">提案通過 / 啟動開發</div>
-          <div class="step-desc">客戶簽約後，PM 開始將提案轉為可執行的 User Story。</div>
+          <div class="step-title">觸發「產生 Story，[客戶名]」</div>
+          <div class="step-desc">提案通過後 PM 下觸發詞，skill 直接執行、不問額外問題。</div>
+          <div class="step-tags"><span class="step-tag tag-claude">💬 skill: generate-story</span></div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">搜尋客戶資料夾</div>
-          <div class="step-desc">至 Drive 定位該客戶專案資料夾，抓取客製化功能表。</div>
+          <div class="step-title">Drive 搜客戶合作案</div>
+          <div class="step-desc">命名慣例：「客戶名稱 + 合作案」。若 mimeType 為 shortcut，必須用 mimeType 重搜取實際文件 ID。</div>
           <div class="step-tags"><span class="step-tag tag-gdrive">📁 Drive</span></div>
         </div>
         <div class="step">
           <div class="step-num">3</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">讀取客製化需求</div>
-          <div class="step-desc">讀取 Google Docs 客製化功能文件，擷取功能清單與接受準則。</div>
+          <div class="step-title">擷取「客製化功能」章節表格</div>
+          <div class="step-desc">每列作為一個獨立功能點進行後續分析。</div>
           <div class="step-tags"><span class="step-tag tag-gdocs">📄 Docs</span></div>
         </div>
         <div class="step">
           <div class="step-num">4</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">查詢 Jira Epic</div>
-          <div class="step-desc">於 Jira 中尋找既有 Epic，作為新 Story 的 Parent Ticket。</div>
-          <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira</span></div>
+          <div class="step-title">轉 Story — AC 層次化 bullet (4 層)</div>
+          <div class="step-desc">
+            Summary：身為 [角色]，我想要 [功能]，以便於 [價值]。<br>
+            AC：明令不用 Given/When/Then；含「新增欄位連動檢查」規則（派車單匯出、訂單報表匯出要補欄位）。
+          </div>
+          <div class="step-tags"><span class="step-tag tag-claude">🤖 Claude</span></div>
         </div>
         <div class="step">
           <div class="step-num">5</div>
-          <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">參考 Figma 設計稿</div>
-          <div class="step-desc">連動 Figma，讀取 UI 流程與畫面，補充至 Story 描述中。</div>
-          <div class="step-tags"><span class="step-tag tag-figma">🎨 Figma</span></div>
+          <div class="step-actor actor-pm">PM 審閱</div>
+          <div class="step-title">人工審核（嚴禁直接開票）</div>
+          <div class="step-desc">把所有 Story 列在 Chat，等 PM 說「確認」或「OK」才建票。</div>
         </div>
         <div class="step">
           <div class="step-num">6</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">拆分 User Story</div>
-          <div class="step-desc">以客戶功能為單位拆成多張 Story，產生 初版 AC、描述、估點建議。</div>
-          <div class="step-tags"><span class="step-tag tag-claude">🤖 Claude</span></div>
+          <div class="step-title">查既有 Epic 當 Parent</div>
+          <div class="step-desc">能對應才帶 <code>parent_key</code>；判不出來整個欄位不帶（不要猜、不要 null）。</div>
+          <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira MCP</span></div>
         </div>
         <div class="step">
           <div class="step-num">7</div>
-          <div class="step-actor actor-pm">PM 審閱</div>
-          <div class="step-title">Story 初版驗收</div>
-          <div class="step-desc">PM 檢查 Story 切分是否合理、優先順序與初版 AC，補缺漏情境。</div>
-        </div>
-        <div class="step">
-          <div class="step-num">8</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">建立 Jira Stories</div>
-          <div class="step-desc">批次建立 Jira Story（掛在 Epic 底下），正式進入開發 Sprint。</div>
-          <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira</span></div>
+          <div class="step-title">建 Jira Story（description 直接帶 ADF）</div>
+          <div class="step-desc">一次 call 完成：情境（粗體+底線）+ 巢狀 bulletList（4 層）對應 AC。</div>
+          <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira MCP</span></div>
         </div>
       </div>
     </div>
@@ -848,8 +847,9 @@
       <div class="bridge-content">
         <div class="bridge-title">Sprint 開發過程 · AC 多次人工調整</div>
         <div class="bridge-desc">
-          開發進行中，PM 會因實際情境、技術限制、客戶回饋等原因，多次手動修訂 Jira Story 的 AC 與描述。
-          待 Sprint 驗收完畢、AC 定稿後，才會啟動下一階段產出最終 Spec。
+          開發進行中，PM 會因實際情境、技術限制、客戶回饋等原因，多次手動修訂 Jira Story 的 AC 與描述
+          （mcp-atlassian 沒有 update issue 工具 → 用 curl PUT 打 Jira REST API 塞 ADF）。
+          待 AC 定稿後才將最終版本回寫 PRD。
         </div>
         <div class="bridge-tags">
           <span class="step-tag tag-jira">🎫 Jira Iteration</span>
@@ -871,63 +871,94 @@
       </svg>
     </div>
 
-    <!-- PHASE 2B: Spec -->
+    <!-- PHASE 2B: PRD -->
     <div class="phase-block p2" id="phase-2b">
       <div class="phase-block-header">
-        <div class="phase-icon-lg">📐</div>
+        <div class="phase-icon-lg">📘</div>
         <div>
-          <div class="phase-badge">中期 B / During — Product Spec</div>
-          <div class="phase-title">Spec Generator (建立 Product Spec)</div>
+          <div class="phase-badge">中期 B / During — 寫入 PRD</div>
+          <div class="phase-title">Spec Generator (回寫 PRD)</div>
         </div>
-        <div class="phase-project">Story&Spec_Generator/ · Spec</div>
+        <div class="phase-project">Story&Spec_Generator/ · write-spec</div>
       </div>
 
       <div class="steps">
         <div class="step">
           <div class="step-num">1</div>
           <div class="step-actor actor-pm">PM 輸入</div>
-          <div class="step-title">Sprint 驗收完畢</div>
-          <div class="step-desc">開發完成、所有 Story 驗收通過，最終版 AC 已在 Jira 上定稿。</div>
+          <div class="step-title">觸發二選一（skill 開頭先判斷模式）</div>
+          <div class="step-desc">
+            <b>🅰️ 單票模式</b>：訊息含 <code>DAAS-XXXX</code> URL 或 key<br>
+            <b>🅱️ 批次模式</b>：「整理規格寫入規格書」/「寫入 PRD」/「open sprint 的票寫入規格書」/「整個 sprint」<br>
+            兩者都不明確 → 直接問用戶
+          </div>
+          <div class="step-tags"><span class="step-tag tag-claude">💬 skill: write-spec</span></div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">抓取最終 Jira Stories</div>
-          <div class="step-desc">重新讀取已驗收完成的 Jira Story（含 Sprint 中多次修訂後的 AC）。</div>
-          <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira</span></div>
+          <div class="step-title">讀 Jira ticket(s)</div>
+          <div class="step-desc">
+            <b>🅰️ 單票</b>：<code>jira_get_issue</code> 讀該票（fields: *all）。<br>
+            <b>🅱️ 批次</b>：若沒指定 Sprint → <code>jira_get_sprints_from_board</code>（board_id=38, state=active）取 openSprint 並向用戶確認「要寫入 Sprint X 的全部 ticket 嗎？」→ <code>jira_search</code> 完整分頁撈完；只保留 Story/Task（Bug 不寫 PRD）；排除 QA/設計/Infra/E2E/PRD 關鍵字。
+          </div>
+          <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira MCP</span></div>
         </div>
         <div class="step">
           <div class="step-num">3</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">比對 Figma 最終稿</div>
-          <div class="step-desc">同步最新 Figma UI，確保 Spec 畫面描述與實作一致。</div>
-          <div class="step-tags"><span class="step-tag tag-figma">🎨 Figma</span></div>
+          <div class="step-title">依產品線分組 + 整理 4 章節</div>
+          <div class="step-desc">
+            summary tag <code>[TMS]/[App]/[InstaTMS]</code> 分流對應 PRD Doc；無 tag → 單獨列出讓用戶決定。<br>
+            4 章節：功能概述 / 使用者價值 / 使用場景 / 功能列表。不含成功指標、UI/UX 要點。<br>
+            <b>🅱️ 批次</b>：每張 ticket 各自整理。
+          </div>
+          <div class="step-tags"><span class="step-tag tag-claude">🤖 Claude</span></div>
         </div>
         <div class="step">
           <div class="step-num">4</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">OpenSpec 結構化</div>
-          <div class="step-desc">以 OpenSpec 標準格式整合 Stories + AC + Figma，輸出 Product Spec 草稿。</div>
-          <div class="step-tags">
-            <span class="step-tag tag-openspec">📐 OpenSpec</span>
-            <span class="step-tag tag-claude">🤖 Claude</span>
+          <div class="step-title">gdocs-inspect + 規劃插入位置</div>
+          <div class="step-desc">
+            <b>🅰️ 單票</b>：取 heading 結構與 index、建議章節編號與插入位置。<br>
+            <b>🅱️ 批次</b>：每份 PRD 跑一次 inspect，一次規劃該 PRD 內所有待寫票位置，並按 startIndex 由大到小排序寫入順序（從文件底部往上插，避免 index 偏移）。
           </div>
+          <div class="step-tags"><span class="step-tag tag-local">💻 gdocs-inspect.js</span></div>
         </div>
         <div class="step">
           <div class="step-num">5</div>
           <div class="step-actor actor-pm">PM 審閱</div>
-          <div class="step-title">Spec 內容檢查</div>
-          <div class="step-desc">PM 檢查 Spec 是否完整對應最終實作、補充說明與備註。</div>
+          <div class="step-title">展示規劃 + 等待確認</div>
+          <div class="step-desc">
+            把整理好的完整內容 + 建議位置展示給用戶，等用戶確認後才寫入。<br>
+            <b>🅱️ 批次</b>：一次列出每張票要寫入哪份 PRD、哪個章節、寫入順序；用戶可逐張取消或修改，但只做一輪確認（不逐張各問）。
+          </div>
         </div>
         <div class="step">
           <div class="step-num">6</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">寫入產品規格書</div>
-          <div class="step-desc">最終 Spec 歸檔至產品規格書（Google Docs / Confluence），供後續維護參考。</div>
-          <div class="step-tags">
-            <span class="step-tag tag-gdocs">📄 Docs</span>
-            <span class="step-tag tag-openspec">📐 Spec</span>
+          <div class="step-title">自寫 Node 腳本寫入 PRD Doc</div>
+          <div class="step-desc">
+            用 <code>batchUpdate</code> API 精準定位；<b>禁用 MCP replaceText</b>；只能新增、不可移除。<br>
+            格式比照鄰近章節（HEADING_3/4、bold、bullet）。<br>
+            <b>🅱️ 批次</b>：同 PRD 內 reverse index order；跨 PRD 逐個 Doc 處理。
           </div>
+          <div class="step-tags"><span class="step-tag tag-gdocs">📄 Docs API</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">7</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">更新 Doc 頂部「版本紀錄檔案」表格</div>
+          <div class="step-desc">
+            日期 / SP / 說明 / 異動人員；同 Sprint 已有條目用 <code>replaceAllText</code> 追加到現有列（不新增一列）。<br>
+            <b>🅱️ 批次</b>：每份 PRD 只新增/追加一筆，說明欄合併列出所有票號（例「新增 3.1.3.3 / 3.1.3.4（DAAS-6886, DAAS-6887）」）。
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">8</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">驗證格式 + 清理暫時腳本</div>
+          <div class="step-desc">再跑一次 gdocs-inspect + 詳細檢查 bold / bullet / heading 與鄰近既有章節一致，最後刪除本次產生的暫時腳本。</div>
         </div>
       </div>
     </div>
@@ -953,68 +984,81 @@
           <div class="phase-badge">後期 / After — Release</div>
           <div class="phase-title">TMS Release Note</div>
         </div>
-        <div class="phase-project">TMS_Release_Note/</div>
+        <div class="phase-project">TMS_Release_Note/ · release-note</div>
       </div>
 
       <div class="steps">
         <div class="step">
           <div class="step-num">1</div>
           <div class="step-actor actor-pm">PM 輸入</div>
-          <div class="step-title">Sprint 接近收尾</div>
-          <div class="step-desc">開發 Sprint 進入結束階段，準備整理本次版本的交付內容。</div>
+          <div class="step-title">觸發「產生 Release Note」/「go」</div>
+          <div class="step-desc">Sprint 接近收尾，PM 下觸發詞，skill 立刻依序執行、不問問題。</div>
+          <div class="step-tags"><span class="step-tag tag-claude">💬 skill: release-note</span></div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">查詢 Open Sprint</div>
-          <div class="step-desc">連接 Jira DAAS 專案，撈取當前 Open Sprint 的所有 Tickets。</div>
-          <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira</span></div>
+          <div class="step-title">撈 Jira openSprints（完整分頁）</div>
+          <div class="step-desc">JQL: <code>project = DAAS AND sprint in openSprints()</code>，limit 50；<b>必須檢查 next_page_token 撈完</b>（過去漏過第二頁的 Story）。</div>
+          <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira MCP</span></div>
         </div>
         <div class="step">
           <div class="step-num">3</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">過濾已完成 Tickets</div>
-          <div class="step-desc">只保留 Done / Released 狀態，排除未完成或延至下期的項目。</div>
+          <div class="step-title">過濾 Story / Task / Bug</div>
+          <div class="step-desc">summary 不含 QA / 設計 / Infra / E2E / jenkins / docker / 腳本 / PRD / Functional·UI test。</div>
         </div>
         <div class="step">
           <div class="step-num">4</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">讀取歷史 Release Note</div>
-          <div class="step-desc">從 Google Docs 讀取前幾個版本的 Release Note，推算本次版號與日期。</div>
-          <div class="step-tags"><span class="step-tag tag-gdocs">📄 Docs</span></div>
+          <div class="step-title">讀 Doc 最新 HEADING_1 + 14 天</div>
+          <div class="step-desc">用 curl 打 Docs API，<b>只解析 body.content 前幾個 paragraph</b>（不用 docs_getText 讀整份，省 tokens）。</div>
+          <div class="step-tags"><span class="step-tag tag-gdocs">📄 Docs API</span></div>
         </div>
         <div class="step">
           <div class="step-num">5</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">分類 Tickets</div>
-          <div class="step-desc">依 Feature / Enhancement / Bug Fix 分類，整理成 Release Note 結構。</div>
+          <div class="step-title">分類 + 撰寫風格固化</div>
+          <div class="step-desc">
+            Story / Task → 新增 or 優化；Bug → 一律進優化＆修復。[TMS]/[APP]/[前端]/[後端] 決定平台。<br>
+            風格：功能名稱精煉、用戶角度用詞、「名詞+修正」語氣、2-3 句短句「功能是什麼→價值」、描述不重複標題。
+          </div>
           <div class="step-tags"><span class="step-tag tag-claude">🤖 Claude</span></div>
         </div>
         <div class="step">
           <div class="step-num">6</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">產出 draft.md</div>
-          <div class="step-desc">將整理好的內容寫入本地 draft.md，供 PM 先行審閱。</div>
+          <div class="step-title">寫 draft.md（4 header 強制）</div>
+          <div class="step-desc">
+            ★ 新增功能 / ◉ 優化＆修復 × TMS / APP 共 4 個 header，缺項也要留標題 + 「無」。<br>
+            不加 <code>*</code>/<code>-</code> bullet、不加 markdown 粗體（腳本會自動套 Doc 樣式）。
+          </div>
           <div class="step-tags"><span class="step-tag tag-local">💻 draft.md</span></div>
         </div>
         <div class="step">
           <div class="step-num">7</div>
           <div class="step-actor actor-pm">PM 審閱</div>
-          <div class="step-title">人工調整用字</div>
-          <div class="step-desc">PM 調整客戶端可見的描述用字、補充重要公告或已知問題。</div>
+          <div class="step-title">編輯 draft.md → 說「寫入」</div>
+          <div class="step-desc">PM 調整客戶端可見描述、補公告或已知問題；說「寫入」後才推進下一步。</div>
         </div>
         <div class="step">
           <div class="step-num">8</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">寫入 Google Docs</div>
-          <div class="step-desc">最終版本格式化後寫入 Google Docs Release Note 集中頁面。</div>
-          <div class="step-tags"><span class="step-tag tag-gdocs">📄 Docs</span></div>
+          <div class="step-title">write_to_gdoc.py 寫入 Doc</div>
+          <div class="step-desc">專屬 Python 腳本自動處理：找 Doc 最新 HEADING_1、插入新內容、套 14pt / 粗體 / bullet / pageBreak。<b>格式規則全在腳本，不手動 batchUpdate</b>。</div>
+          <div class="step-tags">
+            <span class="step-tag tag-local">💻 write_to_gdoc.py</span>
+            <span class="step-tag tag-gdocs">📄 Docs</span>
+          </div>
         </div>
         <div class="step">
           <div class="step-num">9</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">自動通知 Chat 群組</div>
-          <div class="step-desc">Release Note 寫入 Google Docs 後，自動觸發訊息發送至 Google Chat 群組，通知客戶與內部團隊本次版本更新。</div>
+          <div class="step-title">Google Chat 通知（格式固化）</div>
+          <div class="step-desc">
+            板 id=38 取 active sprint 名 → space <code>spaces/AAAALHxo-B4</code>：<br>
+            <code>&lt;users/all&gt; {Sprint 名} Release Note 已更新 ✅</code> + 日期 + 本次聚焦（新增功能串接）+ Doc 連結。
+          </div>
           <div class="step-tags"><span class="step-tag tag-gchat">💬 Chat</span></div>
         </div>
       </div>
@@ -1026,32 +1070,32 @@
     <div class="summary-card">
       <div class="summary-title">🧑 PM 介入的關鍵節點</div>
       <ul class="summary-list">
-        <li>接收客戶需求 → 啟動 Proposal</li>
-        <li>提案草稿 → 商業判斷修訂</li>
-        <li>Story 初版驗收 → 建立 Jira</li>
-        <li>Sprint 中 AC 多次人工調整（關鍵）</li>
-        <li>Sprint 驗收完 → Spec 內容檢查</li>
-        <li>Release Note → 用字調整（公告已自動化）</li>
+        <li>口頭輸入客戶需求 → 啟動 Proposal</li>
+        <li>釐清需求（一次一題）+ 選定三方案</li>
+        <li>Story 草稿審核（嚴禁直接開票）</li>
+        <li>Sprint 中 AC 多次手動調整（curl 塞 ADF）</li>
+        <li>PRD 寫入確認：單票 / Sprint 整批</li>
+        <li>Release Note draft.md 用字調整</li>
       </ul>
     </div>
     <div class="summary-card">
       <div class="summary-title">🤖 AI 自動化的重點範圍</div>
       <ul class="summary-list">
-        <li>跨系統資料彙整（Drive、Jira、Figma）</li>
-        <li>Codebase 與 API 的一致性比對</li>
-        <li>結構化文件生成（Stories、Spec、Notes）</li>
-        <li>自動寫回 Jira / Google Docs</li>
-        <li>Release Note 發佈後自動通知 Chat 群組</li>
+        <li>並行抓資料（Drive / PRD / Codebase）</li>
+        <li>需求合併 + 既有實作比對（已完成/可複用/全新）</li>
+        <li>Jira 建票 description 直接帶 ADF（一次 call）</li>
+        <li>PRD 寫入用 Docs REST API（禁 MCP replaceText）</li>
+        <li>Release Note 自動分頁撈、自動寫 Doc、自動通知 Chat</li>
       </ul>
     </div>
     <div class="summary-card">
-      <div class="summary-title">🔄 四階段資料流向</div>
+      <div class="summary-title">🔄 三階段資料流向</div>
       <ul class="summary-list">
-        <li>前期：Drive + Codebase → Docs 提案</li>
-        <li>中期 A：Docs + Figma → Jira Stories</li>
-        <li>Sprint：Jira AC 人工反覆調整</li>
-        <li>中期 B：定稿 Jira → Product Spec</li>
-        <li>後期：Jira Sprint → Docs Release Note</li>
+        <li>前期：需求 + 合作案 + Codebase + PRD → 合作案表格 / Jira Story</li>
+        <li>中期 A：合作案「客製化功能」表 → Jira Story（ADF）</li>
+        <li>Sprint：Jira AC 反覆調整（curl PUT）</li>
+        <li>中期 B：Jira ticket / Sprint → 回寫 PRD（TMS/App/InstaTMS）</li>
+        <li>後期：openSprints → Release Note Doc + Chat 通知</li>
       </ul>
     </div>
   </div>
