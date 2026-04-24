@@ -32,20 +32,19 @@
     margin-bottom: 48px;
     text-align: center;
   }
-
   /* ======== View system ======== */
   .view { display: none; width: 100%; flex-direction: column; align-items: center; }
   .view.active { display: flex; }
 
   /* ============================================================
-     OVERVIEW STYLES
+     OVERVIEW STYLES — 4 phases
      ============================================================ */
   .timeline {
     display: flex;
     align-items: flex-start;
     gap: 0;
     position: relative;
-    max-width: 1200px;
+    max-width: 1400px;
     width: 100%;
   }
 
@@ -54,7 +53,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 48px;
+    min-width: 36px;
     padding-top: 80px;
   }
   .connector svg { filter: drop-shadow(0 0 6px rgba(255,255,255,0.3)); }
@@ -68,22 +67,25 @@
   }
 
   .phase-label {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    padding: 6px 18px;
+    padding: 6px 16px;
     border-radius: 20px;
     color: #fff;
+    white-space: nowrap;
   }
+  /* Phase order in DOM: phase(1) conn(2) phase(3) conn(4) phase(5) conn(6) phase(7) */
   .phase:nth-child(1) .phase-label { background: linear-gradient(135deg, #f093fb, #f5576c); }
-  .phase:nth-child(3) .phase-label { background: linear-gradient(135deg, #4facfe, #00f2fe); }
-  .phase:nth-child(5) .phase-label { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+  .phase:nth-child(3) .phase-label { background: linear-gradient(135deg, #ffd54f, #ff9800); }
+  .phase:nth-child(5) .phase-label { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+  .phase:nth-child(7) .phase-label { background: linear-gradient(135deg, #43e97b, #38f9d7); }
 
   .card {
     width: 100%;
     border-radius: 20px;
-    padding: 28px 22px;
+    padding: 24px 18px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -112,46 +114,52 @@
     border: 1px solid rgba(240,147,251,0.3);
   }
   .phase:nth-child(3) .card {
+    background: linear-gradient(145deg, rgba(255,213,79,0.15), rgba(255,152,0,0.1));
+    border: 1px solid rgba(255,213,79,0.3);
+  }
+  .phase:nth-child(5) .card {
     background: linear-gradient(145deg, rgba(79,172,254,0.15), rgba(0,242,254,0.1));
     border: 1px solid rgba(79,172,254,0.3);
   }
-  .phase:nth-child(5) .card {
+  .phase:nth-child(7) .card {
     background: linear-gradient(145deg, rgba(67,233,123,0.15), rgba(56,249,215,0.1));
     border: 1px solid rgba(67,233,123,0.3);
   }
 
-  .card-icon { font-size: 2.5rem; margin-bottom: 10px; }
-  .card-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; }
-  .card-project { font-size: 0.78rem; color: #aaa; margin-bottom: 14px; font-family: monospace; }
-  .card-desc { font-size: 0.88rem; color: #ccc; line-height: 1.6; margin-bottom: 18px; }
+  .card-icon { font-size: 2.3rem; margin-bottom: 10px; }
+  .card-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 4px; }
+  .card-project { font-size: 0.74rem; color: #aaa; margin-bottom: 12px; font-family: monospace; }
+  .card-desc { font-size: 0.82rem; color: #ccc; line-height: 1.5; margin-bottom: 14px; }
 
   .section-header {
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    margin-top: 16px;
+    margin-top: 14px;
     margin-bottom: 8px;
     padding-bottom: 4px;
     text-align: left;
   }
   .phase:nth-child(1) .section-header { color: #f093fb; border-bottom: 1px solid rgba(240,147,251,0.2); }
-  .phase:nth-child(3) .section-header { color: #4facfe; border-bottom: 1px solid rgba(79,172,254,0.2); }
-  .phase:nth-child(5) .section-header { color: #43e97b; border-bottom: 1px solid rgba(67,233,123,0.2); }
+  .phase:nth-child(3) .section-header { color: #ffd54f; border-bottom: 1px solid rgba(255,213,79,0.2); }
+  .phase:nth-child(5) .section-header { color: #4facfe; border-bottom: 1px solid rgba(79,172,254,0.2); }
+  .phase:nth-child(7) .section-header { color: #43e97b; border-bottom: 1px solid rgba(67,233,123,0.2); }
 
   .tasks { text-align: left; display: flex; flex-direction: column; gap: 6px; }
   .task {
     display: flex;
     align-items: flex-start;
     gap: 8px;
-    font-size: 0.82rem;
+    font-size: 0.76rem;
     color: #ddd;
     line-height: 1.4;
   }
   .task-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
   .phase:nth-child(1) .task-dot { background: #f093fb; }
-  .phase:nth-child(3) .task-dot { background: #4facfe; }
-  .phase:nth-child(5) .task-dot { background: #43e97b; }
+  .phase:nth-child(3) .task-dot { background: #ffd54f; }
+  .phase:nth-child(5) .task-dot { background: #4facfe; }
+  .phase:nth-child(7) .task-dot { background: #43e97b; }
 
   .data-tags {
     display: flex;
@@ -161,15 +169,15 @@
     text-align: left;
   }
   .data-tag {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 600;
-    padding: 3px 10px;
+    padding: 3px 9px;
     border-radius: 8px;
     display: inline-flex;
     align-items: center;
     gap: 4px;
   }
-  .data-tag .tag-icon { font-size: 0.72rem; }
+  .data-tag .tag-icon { font-size: 0.7rem; }
 
   .tag-gdrive { background: rgba(66,133,244,0.2); color: #8ab4f8; border: 1px solid rgba(66,133,244,0.3); }
   .tag-gdocs { background: rgba(25,103,210,0.2); color: #6da4f7; border: 1px solid rgba(25,103,210,0.3); }
@@ -186,28 +194,29 @@
     margin-top: 48px;
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 20px 32px;
+    gap: 12px;
+    padding: 20px 28px;
     background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 16px;
-    max-width: 1200px;
+    max-width: 1400px;
     width: 100%;
     justify-content: center;
     flex-wrap: wrap;
   }
   .flow-step {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    padding: 8px 20px;
+    padding: 8px 16px;
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.2s ease, opacity 0.2s ease;
   }
   .flow-step:hover { transform: translateY(-2px); opacity: 0.85; }
   .flow-step.s1 { background: rgba(240,147,251,0.2); color: #f093fb; }
-  .flow-step.s2 { background: rgba(79,172,254,0.2); color: #4facfe; }
-  .flow-step.s3 { background: rgba(67,233,123,0.2); color: #43e97b; }
+  .flow-step.s2 { background: rgba(255,213,79,0.2); color: #ffd54f; }
+  .flow-step.s3 { background: rgba(79,172,254,0.2); color: #4facfe; }
+  .flow-step.s4 { background: rgba(67,233,123,0.2); color: #43e97b; }
   .flow-arrow { color: #555; font-size: 1.2rem; }
 
   .legend {
@@ -216,7 +225,7 @@
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
-    max-width: 1200px;
+    max-width: 1400px;
   }
   .legend-item {
     font-size: 0.72rem;
@@ -248,10 +257,14 @@
     border: 1px solid rgba(240,147,251,0.25);
   }
   .phase-block.p2 {
+    background: linear-gradient(145deg, rgba(255,213,79,0.08), rgba(255,152,0,0.04));
+    border: 1px solid rgba(255,213,79,0.25);
+  }
+  .phase-block.p3 {
     background: linear-gradient(145deg, rgba(79,172,254,0.08), rgba(0,242,254,0.04));
     border: 1px solid rgba(79,172,254,0.25);
   }
-  .phase-block.p3 {
+  .phase-block.p4 {
     background: linear-gradient(145deg, rgba(67,233,123,0.08), rgba(56,249,215,0.04));
     border: 1px solid rgba(67,233,123,0.25);
   }
@@ -273,8 +286,9 @@
     color: #fff;
   }
   .p1 .phase-badge { background: linear-gradient(135deg, #f093fb, #f5576c); }
-  .p2 .phase-badge { background: linear-gradient(135deg, #4facfe, #00f2fe); }
-  .p3 .phase-badge { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+  .p2 .phase-badge { background: linear-gradient(135deg, #ffd54f, #ff9800); }
+  .p3 .phase-badge { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+  .p4 .phase-badge { background: linear-gradient(135deg, #43e97b, #38f9d7); }
 
   .phase-icon-lg { font-size: 2rem; }
   .phase-title {
@@ -287,6 +301,40 @@
     font-family: monospace;
     margin-left: auto;
   }
+
+  /* Scenario split for Phase 1 */
+  .scenario-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .scenario-box {
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  .scenario-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #fff;
+  }
+  .scenario-desc {
+    font-size: 0.8rem;
+    color: #ccc;
+    line-height: 1.55;
+  }
+  .scenario-desc code {
+    background: rgba(255,255,255,0.08);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: #ffab91;
+  }
+  .scenario-customer { border-left: 3px solid #f5576c; }
+  .scenario-internal { border-left: 3px solid #4facfe; }
 
   .steps {
     display: grid;
@@ -308,8 +356,9 @@
     box-shadow: 0 12px 32px rgba(0,0,0,0.35);
   }
   .p1 .step:hover { border-color: rgba(240,147,251,0.5); }
-  .p2 .step:hover { border-color: rgba(79,172,254,0.5); }
-  .p3 .step:hover { border-color: rgba(67,233,123,0.5); }
+  .p2 .step:hover { border-color: rgba(255,213,79,0.5); }
+  .p3 .step:hover { border-color: rgba(79,172,254,0.5); }
+  .p4 .step:hover { border-color: rgba(67,233,123,0.5); }
 
   .step-num {
     position: absolute;
@@ -326,8 +375,9 @@
     color: #fff;
   }
   .p1 .step-num { background: linear-gradient(135deg, #f093fb, #f5576c); }
-  .p2 .step-num { background: linear-gradient(135deg, #4facfe, #00f2fe); }
-  .p3 .step-num { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+  .p2 .step-num { background: linear-gradient(135deg, #ffd54f, #ff9800); }
+  .p3 .step-num { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+  .p4 .step-num { background: linear-gradient(135deg, #43e97b, #38f9d7); }
 
   .step-title {
     font-size: 0.95rem;
@@ -341,6 +391,12 @@
     color: #bbb;
     line-height: 1.5;
     margin-bottom: 10px;
+  }
+  .step-desc code {
+    background: rgba(255,255,255,0.08);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 0.72rem;
   }
 
   .step-actor {
@@ -373,50 +429,22 @@
     gap: 3px;
   }
 
-  /* Bridge between Phase 2A and 2B */
-  .bridge {
-    margin: 8px auto;
-    max-width: 1400px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 20px 28px;
+  /* Pause notice (customer signing gate) */
+  .pause-notice {
+    margin: 16px 0;
+    padding: 14px 18px;
     background: repeating-linear-gradient(
       45deg,
-      rgba(255,171,0,0.05),
-      rgba(255,171,0,0.05) 10px,
-      rgba(255,171,0,0.1) 10px,
-      rgba(255,171,0,0.1) 20px
+      rgba(245,87,108,0.05),
+      rgba(245,87,108,0.05) 10px,
+      rgba(245,87,108,0.1) 10px,
+      rgba(245,87,108,0.1) 20px
     );
-    border: 1px dashed rgba(255,171,0,0.4);
-    border-radius: 16px;
-  }
-  .bridge-icon {
-    font-size: 2rem;
-    animation: spin 6s linear infinite;
-  }
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-  .bridge-content { flex: 1; }
-  .bridge-title {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #ffd54f;
-    margin-bottom: 6px;
-  }
-  .bridge-desc {
+    border: 1px dashed rgba(245,87,108,0.4);
+    border-radius: 12px;
     font-size: 0.82rem;
-    color: #ccc;
-    line-height: 1.6;
-    margin-bottom: 8px;
-  }
-  .bridge-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
+    color: #ffb3b3;
+    text-align: center;
   }
 
   .phase-arrow {
@@ -492,7 +520,7 @@
     border-color: rgba(255,255,255,0.4);
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .timeline { flex-direction: column; align-items: center; }
     .connector {
       padding-top: 0;
@@ -500,9 +528,10 @@
       min-height: 40px;
       transform: rotate(90deg);
     }
-    .phase { width: 100%; max-width: 400px; }
+    .phase { width: 100%; max-width: 420px; }
     .steps { grid-template-columns: 1fr; }
     .phase-project { margin-left: 0; width: 100%; }
+    .scenario-split { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -513,119 +542,163 @@
      ============================================================ -->
 <div id="overview-view" class="view active">
   <h1>PM Workflow / AI 工具鏈</h1>
-  <p class="subtitle">從提案到交付，三個 AI 專案貫穿 PM 工作的前、中、後 · 點擊卡片查看詳細流程</p>
+  <p class="subtitle">從提案到交付，四個階段貫穿 PM 工作 · 點擊卡片查看詳細流程</p>
 
   <div class="timeline">
 
-    <!-- Phase 1: Proposal -->
+    <!-- Phase 1: Shape & Kickoff -->
     <div class="phase">
-      <div class="phase-label">前期 / Before</div>
+      <div class="phase-label">前期 / Shape &amp; Kickoff</div>
       <div class="card" data-target="phase-1">
-        <div class="card-icon">📋</div>
-        <div class="card-title">Proposal Creator</div>
-        <div class="card-project">Proposal_Creator/</div>
+        <div class="card-icon">🎯</div>
+        <div class="card-title">Shape &amp; Kickoff</div>
+        <div class="card-project">Shape_Kickoff/</div>
         <div class="card-desc">
-          客戶提案階段<br>
-          需求探索、三方案產出、寫回合作案；可直接開 Jira Ticket
+          需求形塑到啟動執行<br>
+          客戶案 / 產品化題目 兩條路徑；產方案、建 Jira ticket
         </div>
 
         <div class="section-header">資料來源 / Input</div>
         <div class="data-tags">
-          <span class="data-tag tag-gdrive"><span class="tag-icon">📁</span> Google Drive</span>
-          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> PRD Docs</span>
-          <span class="data-tag tag-local"><span class="tag-icon">💻</span> Local Codebase</span>
+          <span class="data-tag tag-gdrive"><span class="tag-icon">📁</span> Drive</span>
+          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> PRD</span>
+          <span class="data-tag tag-local"><span class="tag-icon">💻</span> Codebase</span>
+          <span class="data-tag tag-figma"><span class="tag-icon">🎨</span> Figma</span>
         </div>
         <div class="tasks">
-          <div class="task"><span class="task-dot"></span>PM 口頭輸入客戶需求（起點）</div>
-          <div class="task"><span class="task-dot"></span>讀客戶合作案（Drive）</div>
-          <div class="task"><span class="task-dot"></span>讀 TMS / App / InstaTMS PRD</div>
-          <div class="task"><span class="task-dot"></span>Agent 搜 Codebase 既有實作</div>
-          <div class="task"><span class="task-dot"></span>/brainstorm-proposal · /create-jira-ticket</div>
+          <div class="task"><span class="task-dot"></span>客戶案：讀合作案 → 三方案 → 寫回</div>
+          <div class="task"><span class="task-dot"></span>產品化題目：PM 提供資料 + 共同討論</div>
+          <div class="task"><span class="task-dot"></span>skill: /shape-proposal（客戶案）</div>
+          <div class="task"><span class="task-dot"></span>/build-prototype（選配）</div>
+          <div class="task"><span class="task-dot"></span>/kickoff-from-chat · /kickoff-from-proposal</div>
         </div>
 
         <div class="section-header">產出 / Output</div>
         <div class="data-tags">
           <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> 合作案 Doc</span>
           <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira Story</span>
+          <span class="data-tag tag-local"><span class="tag-icon">🖥️</span> HTML Prototype</span>
         </div>
         <div class="tasks">
           <div class="task"><span class="task-dot"></span>產品化 / 中間 / 暴力解 三方案</div>
-          <div class="task"><span class="task-dot"></span>用 Docs REST API 寫回合作案表格</div>
-          <div class="task"><span class="task-dot"></span>可直接將對話內容轉 Jira Story（ADF）</div>
+          <div class="task"><span class="task-dot"></span>對話或合作案轉 Jira Story（ADF）</div>
+          <div class="task"><span class="task-dot"></span>客戶案於此暫停等簽約</div>
         </div>
       </div>
     </div>
 
     <div class="connector">
-      <svg width="48" height="24" viewBox="0 0 48 24">
+      <svg width="36" height="24" viewBox="0 0 36 24">
         <defs>
           <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" style="stop-color:#f5576c;stop-opacity:0.8"/>
-            <stop offset="100%" style="stop-color:#4facfe;stop-opacity:0.8"/>
+            <stop offset="100%" style="stop-color:#ffd54f;stop-opacity:0.8"/>
           </linearGradient>
         </defs>
-        <line x1="0" y1="12" x2="36" y2="12" stroke="url(#g1)" stroke-width="2"/>
-        <polygon points="36,6 48,12 36,18" fill="url(#g1)"/>
+        <line x1="0" y1="12" x2="24" y2="12" stroke="url(#g1)" stroke-width="2"/>
+        <polygon points="24,6 36,12 24,18" fill="url(#g1)"/>
       </svg>
     </div>
 
-    <!-- Phase 2: Story & Spec -->
+    <!-- Phase 2: Sprint Development -->
     <div class="phase">
-      <div class="phase-label">中期 / During</div>
-      <div class="card" data-target="phase-2a">
-        <div class="card-icon">🔧</div>
-        <div class="card-title">Story & Spec Generator</div>
-        <div class="card-project">Story&amp;Spec_Generator/</div>
+      <div class="phase-label">中期 / Sprint</div>
+      <div class="card" data-target="phase-2">
+        <div class="card-icon">🔄</div>
+        <div class="card-title">Sprint Development</div>
+        <div class="card-project">(manual iteration)</div>
         <div class="card-desc">
-          開發規劃階段<br>
-          從合作案產 Jira Story；從 Jira 回寫 PRD（單票 / Sprint 整批）
+          開發執行階段<br>
+          開發中 PM 多次手動調整 AC、回應客戶/技術限制
         </div>
 
         <div class="section-header">資料來源 / Input</div>
         <div class="data-tags">
-          <span class="data-tag tag-gdrive"><span class="tag-icon">📁</span> Google Drive</span>
-          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> 合作案 Doc</span>
-          <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira Ticket / Sprint</span>
+          <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira Stories</span>
+          <span class="data-tag tag-pm"><span class="tag-icon">🧑</span> 客戶 / 工程回饋</span>
         </div>
         <div class="tasks">
-          <div class="task"><span class="task-dot"></span>skill: <code>generate-story</code>（Story）、<code>write-spec</code>（PRD）</div>
-          <div class="task"><span class="task-dot"></span>Story：Drive 抓合作案「客製化功能」表格</div>
-          <div class="task"><span class="task-dot"></span>Story：AC 層次化 bullet（4 層），不用 Given/When/Then</div>
-          <div class="task"><span class="task-dot"></span>Story：查現有 Epic 當 parent（判不出不帶）</div>
-          <div class="task"><span class="task-dot"></span>PRD 寫入：單票（DAAS-XXXX） 或 open sprint 整批</div>
-          <div class="task"><span class="task-dot"></span>PRD 寫入：依 [TMS]/[App]/[InstaTMS] tag 分流</div>
+          <div class="task"><span class="task-dot"></span>開發過程發現新需求或限制</div>
+          <div class="task"><span class="task-dot"></span>PM 多次手動調整 AC 與描述</div>
+          <div class="task"><span class="task-dot"></span>QA 驗收、bug 回修、AC 再調整</div>
         </div>
 
         <div class="section-header">產出 / Output</div>
         <div class="data-tags">
-          <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira Stories (ADF)</span>
+          <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> 驗收完成 Ticket</span>
+        </div>
+        <div class="tasks">
+          <div class="task"><span class="task-dot"></span>AC 最終定稿的 Jira ticket</div>
+          <div class="task"><span class="task-dot"></span>為下一階段 Spec 固化做準備</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector">
+      <svg width="36" height="24" viewBox="0 0 36 24">
+        <defs>
+          <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#ffd54f;stop-opacity:0.8"/>
+            <stop offset="100%" style="stop-color:#4facfe;stop-opacity:0.8"/>
+          </linearGradient>
+        </defs>
+        <line x1="0" y1="12" x2="24" y2="12" stroke="url(#g2)" stroke-width="2"/>
+        <polygon points="24,6 36,12 24,18" fill="url(#g2)"/>
+      </svg>
+    </div>
+
+    <!-- Phase 3: Spec Finalization -->
+    <div class="phase">
+      <div class="phase-label">中後期 / Spec</div>
+      <div class="card" data-target="phase-3">
+        <div class="card-icon">📘</div>
+        <div class="card-title">Spec Finalization</div>
+        <div class="card-project">Spec_Finalization/</div>
+        <div class="card-desc">
+          驗收後規格固化<br>
+          從驗收完成的 Jira ticket 整理為 PRD（單票 / Sprint 整批）
+        </div>
+
+        <div class="section-header">資料來源 / Input</div>
+        <div class="data-tags">
+          <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> 已驗收 Ticket</span>
+          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> PRD Doc</span>
+        </div>
+        <div class="tasks">
+          <div class="task"><span class="task-dot"></span>觸發時機：sprint 驗收後才啟用</div>
+          <div class="task"><span class="task-dot"></span>/write-spec：單票模式（DAAS-XXXX）</div>
+          <div class="task"><span class="task-dot"></span>/write-spec-batch：批次模式（open sprint）</div>
+          <div class="task"><span class="task-dot"></span>/openspec-* 工具鏈（propose/apply/archive/explore）</div>
+        </div>
+
+        <div class="section-header">產出 / Output</div>
+        <div class="data-tags">
           <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> PRD (TMS/App/InstaTMS)</span>
         </div>
         <div class="tasks">
-          <div class="task"><span class="task-dot"></span>建 Jira Story，description 直接帶 ADF</div>
-          <div class="task"><span class="task-dot"></span>PRD 以 4 章節寫入（概述/價值/場景/功能列表）</div>
+          <div class="task"><span class="task-dot"></span>4 章節寫入（概述/價值/場景/功能列表）</div>
           <div class="task"><span class="task-dot"></span>更新 Doc 頂部「版本紀錄檔案」表格</div>
         </div>
       </div>
     </div>
 
     <div class="connector">
-      <svg width="48" height="24" viewBox="0 0 48 24">
+      <svg width="36" height="24" viewBox="0 0 36 24">
         <defs>
-          <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" style="stop-color:#4facfe;stop-opacity:0.8"/>
             <stop offset="100%" style="stop-color:#43e97b;stop-opacity:0.8"/>
           </linearGradient>
         </defs>
-        <line x1="0" y1="12" x2="36" y2="12" stroke="url(#g2)" stroke-width="2"/>
-        <polygon points="36,6 48,12 36,18" fill="url(#g2)"/>
+        <line x1="0" y1="12" x2="24" y2="12" stroke="url(#g3)" stroke-width="2"/>
+        <polygon points="24,6 36,12 24,18" fill="url(#g3)"/>
       </svg>
     </div>
 
-    <!-- Phase 3: Release Note -->
+    <!-- Phase 4: Release Note -->
     <div class="phase">
-      <div class="phase-label">後期 / After</div>
-      <div class="card" data-target="phase-3">
+      <div class="phase-label">後期 / Release</div>
+      <div class="card" data-target="phase-4">
         <div class="card-icon">🚀</div>
         <div class="card-title">TMS Release Note</div>
         <div class="card-project">TMS_Release_Note/</div>
@@ -636,12 +709,12 @@
 
         <div class="section-header">資料來源 / Input</div>
         <div class="data-tags">
-          <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> Jira openSprints</span>
-          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Release Note Doc</span>
+          <span class="data-tag tag-jira"><span class="tag-icon">🎫</span> openSprints</span>
+          <span class="data-tag tag-gdocs"><span class="tag-icon">📄</span> Release Doc</span>
         </div>
         <div class="tasks">
-          <div class="task"><span class="task-dot"></span>撈 openSprints tickets（完整分頁，過去漏過）</div>
-          <div class="task"><span class="task-dot"></span>只解析 Doc 頂部 HEADING_1 + 14 天推算日期</div>
+          <div class="task"><span class="task-dot"></span>撈 openSprints（完整分頁）</div>
+          <div class="task"><span class="task-dot"></span>只解析 Doc 頂部 HEADING_1 + 14 天</div>
           <div class="task"><span class="task-dot"></span>draft.md 固定 4 header（TMS/APP × 新增/優化）</div>
           <div class="task"><span class="task-dot"></span>撰寫風格固化（名稱精煉、價值導向）</div>
         </div>
@@ -652,8 +725,8 @@
           <span class="data-tag tag-gchat"><span class="tag-icon">💬</span> Google Chat</span>
         </div>
         <div class="tasks">
-          <div class="task"><span class="task-dot"></span>write_to_gdoc.py 寫入（格式全在腳本內）</div>
-          <div class="task"><span class="task-dot"></span>自動通知 Chat（@all + Sprint 名 + 聚焦 + Doc link）</div>
+          <div class="task"><span class="task-dot"></span>write_to_gdoc.py 寫入</div>
+          <div class="task"><span class="task-dot"></span>自動通知 Chat（@all + Sprint 名 + Doc link）</div>
         </div>
       </div>
     </div>
@@ -661,11 +734,13 @@
   </div>
 
   <div class="flow-bar">
-    <span class="flow-step s1" data-target="phase-1">需求 + 合作案 + Codebase → 三方案</span>
+    <span class="flow-step s1" data-target="phase-1">需求 → 形塑 → 建 ticket</span>
     <span class="flow-arrow">→</span>
-    <span class="flow-step s2" data-target="phase-2a">合作案 → Jira Story → 回寫 PRD</span>
+    <span class="flow-step s2" data-target="phase-2">Sprint 開發 + AC 調整</span>
     <span class="flow-arrow">→</span>
-    <span class="flow-step s3" data-target="phase-3">Sprint → Release Note + Chat 通知</span>
+    <span class="flow-step s3" data-target="phase-3">驗收後 → 回寫 PRD</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step s4" data-target="phase-4">Release Note + Chat 通知</span>
   </div>
 
   <div class="legend">
@@ -673,6 +748,7 @@
     <div class="legend-item"><span class="data-tag tag-gdocs" style="font-size:0.65rem;padding:2px 6px;">Google Docs</span></div>
     <div class="legend-item"><span class="data-tag tag-jira" style="font-size:0.65rem;padding:2px 6px;">Jira</span></div>
     <div class="legend-item"><span class="data-tag tag-gchat" style="font-size:0.65rem;padding:2px 6px;">Google Chat</span></div>
+    <div class="legend-item"><span class="data-tag tag-figma" style="font-size:0.65rem;padding:2px 6px;">Figma</span></div>
     <div class="legend-item"><span class="data-tag tag-local" style="font-size:0.65rem;padding:2px 6px;">Local Codebase</span></div>
   </div>
 </div>
@@ -682,81 +758,151 @@
      ============================================================ -->
 <div id="detailed-view" class="view">
   <div style="max-width:1400px; width:100%;">
-    <button class="back-btn" id="back-to-overview">← 回到三階段總覽</button>
+    <button class="back-btn" id="back-to-overview">← 回到四階段總覽</button>
   </div>
 
   <h1>PM Workflow / 詳細流程拆解</h1>
-  <p class="subtitle">三個 AI 專案 × 逐步操作細節 — 前期、中期、後期</p>
+  <p class="subtitle">四階段 × 逐步操作細節 — 形塑 · 啟動 · Sprint · Spec · Release</p>
 
   <div class="workflow">
 
-    <!-- PHASE 1 -->
+    <!-- PHASE 1: Shape & Kickoff -->
     <div class="phase-block p1" id="phase-1">
       <div class="phase-block-header">
-        <div class="phase-icon-lg">📋</div>
+        <div class="phase-icon-lg">🎯</div>
         <div>
-          <div class="phase-badge">前期 / Before — Proposal</div>
-          <div class="phase-title">Proposal Creator</div>
+          <div class="phase-badge">前期 / Shape &amp; Kickoff</div>
+          <div class="phase-title">Shape &amp; Kickoff</div>
         </div>
-        <div class="phase-project">Proposal_Creator/ · /brainstorm-proposal</div>
+        <div class="phase-project">Shape_Kickoff/</div>
+      </div>
+
+      <!-- Scenario splitter -->
+      <div class="scenario-split">
+        <div class="scenario-box scenario-customer">
+          <div class="scenario-title">🏢 客戶案路徑</div>
+          <div class="scenario-desc">
+            讀客戶合作案 → <code>/shape-proposal</code> 產三方案 → 寫回合作案 → <b>⏸ 暫停等簽約</b> → 簽約後 <code>/kickoff-from-proposal</code> 從合作案批次建 Story
+          </div>
+        </div>
+        <div class="scenario-box scenario-internal">
+          <div class="scenario-title">🏠 產品化題目路徑</div>
+          <div class="scenario-desc">
+            PM 提供資料 + Claude 一起討論 → 形塑成產品化題目 → 覺得可以做 → <code>/kickoff-from-chat</code> 從對話直接建 Story（一氣呵成）
+          </div>
+        </div>
       </div>
 
       <div class="steps">
         <div class="step">
           <div class="step-num">1</div>
           <div class="step-actor actor-pm">PM 輸入</div>
-          <div class="step-title">PM 輸入客戶需求</div>
-          <div class="step-desc">口頭釐清客戶需求、討論範圍與方向，作為後續分析的起點。</div>
-          <div class="step-tags"><span class="step-tag tag-claude">💬 /brainstorm-proposal 客戶名稱</span></div>
+          <div class="step-title">PM 起點：說需求或啟動 skill</div>
+          <div class="step-desc">
+            客戶案：<code>/shape-proposal 客戶名稱</code><br>
+            產品化題目：PM 提供資料 + 直接討論（無 skill）
+          </div>
+          <div class="step-tags"><span class="step-tag tag-claude">💬 Claude Code</span></div>
         </div>
+
         <div class="step">
           <div class="step-num">2</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">讀合作案 + PRD + Codebase（並行）</div>
-          <div class="step-desc">Drive 找「客戶名 + 合作案」文件、讀 TMS / App / InstaTMS PRD、用 Agent 搜 Codebase 既有實作。</div>
+          <div class="step-title">讀合作案 + PRD + Codebase（客戶案）</div>
+          <div class="step-desc">
+            shape-proposal：Drive 找「客戶名 + 合作案」、讀 TMS/App/InstaTMS PRD、Agent 搜 Codebase。shortcut 需用 mimeType 重搜。
+          </div>
           <div class="step-tags">
             <span class="step-tag tag-gdrive">📁 Drive</span>
-            <span class="step-tag tag-gdocs">📄 Docs</span>
+            <span class="step-tag tag-gdocs">📄 PRD</span>
             <span class="step-tag tag-local">💻 Codebase</span>
           </div>
         </div>
+
         <div class="step">
           <div class="step-num">3</div>
           <div class="step-actor actor-both">AI + PM</div>
           <div class="step-title">釐清需求（一次一題）</div>
           <div class="step-desc">優先用選擇題、聚焦需求目的 / 限制條件 / 優先級。</div>
         </div>
+
         <div class="step">
           <div class="step-num">4</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">需求合併 + 標註已有實作</div>
-          <div class="step-desc">區分「已完成（無需開發） / 可複用（部分開發） / 全新（從零開發）」。</div>
-        </div>
-        <div class="step">
-          <div class="step-num">5</div>
-          <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">產出三方案</div>
-          <div class="step-desc">產品化 / 中間 / 暴力解，列出各方案描述與與現有功能的關係。</div>
+          <div class="step-title">客戶案：產三方案 + 需求合併</div>
+          <div class="step-desc">
+            產品化 / 中間 / 暴力解，標註「已完成 / 可複用 / 全新」與人天估算。可合併的需求主動標註。
+          </div>
           <div class="step-tags"><span class="step-tag tag-claude">🤖 Claude</span></div>
         </div>
+
         <div class="step">
-          <div class="step-num">6</div>
+          <div class="step-num">4'</div>
+          <div class="step-actor actor-both">AI + PM</div>
+          <div class="step-title">產品化題目：共同討論形塑方向</div>
+          <div class="step-desc">
+            PM 提供產品資料、客戶回饋、內部需求等 context，跟 Claude 一起討論、釐清要做什麼，覺得可以做時直接進入建 ticket。過程不一定產出正式計畫檔。
+          </div>
+          <div class="step-tags"><span class="step-tag tag-claude">🤖 Claude</span></div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">5</div>
           <div class="step-actor actor-pm">PM 審閱</div>
           <div class="step-title">審核草稿、選定方案</div>
-          <div class="step-desc">PM 檢視三方案、選定後確認是否寫入合作案。</div>
+          <div class="step-desc">PM 檢視方案、確認後決定下一步（寫回合作案 or 直接建票）。</div>
         </div>
+
         <div class="step">
-          <div class="step-num">7</div>
+          <div class="step-num">6</div>
           <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">寫回合作案表格</div>
-          <div class="step-desc">用 Google Docs REST API + OAuth：<code>insertTableRow</code> 新增列，reverse index 填各欄位（非 MCP）。</div>
+          <div class="step-title">客戶案：寫回合作案表格</div>
+          <div class="step-desc">用 Google Docs REST API + OAuth：<code>insertTableRow</code> 新增列，reverse index 填各欄位。</div>
           <div class="step-tags"><span class="step-tag tag-gdocs">📄 Docs API</span></div>
         </div>
+
         <div class="step">
           <div class="step-num">＋</div>
-          <div class="step-actor actor-ai">旁支 skill</div>
-          <div class="step-title">/create-jira-ticket（可選）</div>
-          <div class="step-desc">對話內容即可直接轉 Jira Story：一次 call 建票、description 帶 ADF、AC 4 層 bullet。建票前列出 Story 等 PM 確認。</div>
+          <div class="step-actor actor-ai">選配</div>
+          <div class="step-title">/build-prototype（視覺化）</div>
+          <div class="step-desc">依 Figma 設計系統產 HTML prototype（TMS / APP 兩套 DS）。兩條路徑都可選配。</div>
+          <div class="step-tags">
+            <span class="step-tag tag-figma">🎨 Figma</span>
+            <span class="step-tag tag-local">🖥️ HTML</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pause-notice">
+        ⏸ <b>客戶案到這裡會暫停</b>：等簽約完成後再回來繼續建 ticket；內部案則直接進下一步。
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">7a</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">/kickoff-from-proposal</div>
+          <div class="step-desc">
+            簽約後觸發「產生 Story，[客戶名]」。skill 直接讀合作案「客製化功能」表格 → 逐列轉 Story → 列出等 PM 確認 → 建 Jira ticket（description 帶 ADF，AC 4 層 bullet）。
+          </div>
+          <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira MCP</span></div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">7b</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">/kickoff-from-chat</div>
+          <div class="step-desc">
+            從對話內容即時轉 Story：Summary = 身為/我想要/以便於；AC 層次化 bullet（4 層）。列出 Story 等 PM 確認後建票。
+          </div>
+          <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira MCP</span></div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">8</div>
+          <div class="step-actor actor-ai">AI 自動</div>
+          <div class="step-title">查既有 Epic 當 Parent</div>
+          <div class="step-desc">能對應才帶 <code>parent_key</code>；判不出來整個欄位不帶（不要猜、不要 null）。</div>
           <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira MCP</span></div>
         </div>
       </div>
@@ -767,7 +913,7 @@
         <defs>
           <linearGradient id="arrow1" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" style="stop-color:#f5576c;stop-opacity:0.9"/>
-            <stop offset="100%" style="stop-color:#4facfe;stop-opacity:0.9"/>
+            <stop offset="100%" style="stop-color:#ffd54f;stop-opacity:0.9"/>
           </linearGradient>
         </defs>
         <line x1="20" y1="4" x2="20" y2="30" stroke="url(#arrow1)" stroke-width="2.5"/>
@@ -775,85 +921,45 @@
       </svg>
     </div>
 
-    <!-- PHASE 2A: Jira Story -->
-    <div class="phase-block p2" id="phase-2a">
+    <!-- PHASE 2: Sprint Development -->
+    <div class="phase-block p2" id="phase-2">
       <div class="phase-block-header">
-        <div class="phase-icon-lg">🎫</div>
+        <div class="phase-icon-lg">🔄</div>
         <div>
-          <div class="phase-badge">中期 A / During — Jira Story</div>
-          <div class="phase-title">Story Generator (建立 Jira Story)</div>
+          <div class="phase-badge">中期 / Sprint Development</div>
+          <div class="phase-title">Sprint 開發 + AC 調整</div>
         </div>
-        <div class="phase-project">Story&Spec_Generator/ · generate-story</div>
+        <div class="phase-project">manual iteration in Jira</div>
       </div>
 
       <div class="steps">
         <div class="step">
           <div class="step-num">1</div>
-          <div class="step-actor actor-pm">PM 輸入</div>
-          <div class="step-title">觸發「產生 Story，[客戶名]」</div>
-          <div class="step-desc">提案通過後 PM 下觸發詞，skill 直接執行、不問額外問題。</div>
-          <div class="step-tags"><span class="step-tag tag-claude">💬 skill: generate-story</span></div>
+          <div class="step-actor actor-pm">PM 主導</div>
+          <div class="step-title">Sprint 啟動、工程開發進行中</div>
+          <div class="step-desc">從 Phase 1 建好的 Jira Story 進入 Sprint 開發。PM 跟工程 / QA 協作。</div>
+          <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira</span></div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
-          <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">Drive 搜客戶合作案</div>
-          <div class="step-desc">命名慣例：「客戶名稱 + 合作案」。若 mimeType 為 shortcut，必須用 mimeType 重搜取實際文件 ID。</div>
-          <div class="step-tags"><span class="step-tag tag-gdrive">📁 Drive</span></div>
+          <div class="step-actor actor-pm">PM 手動</div>
+          <div class="step-title">AC 多次調整（實際情境回饋）</div>
+          <div class="step-desc">
+            開發中發現技術限制、客戶回饋、UAT 問題等，PM 需要反覆調整 Story 的 AC 與描述，直到 AC 定稿。
+          </div>
+          <div class="step-tags"><span class="step-tag tag-pm">🧑 PM 手動</span></div>
         </div>
         <div class="step">
           <div class="step-num">3</div>
-          <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">擷取「客製化功能」章節表格</div>
-          <div class="step-desc">每列作為一個獨立功能點進行後續分析。</div>
-          <div class="step-tags"><span class="step-tag tag-gdocs">📄 Docs</span></div>
+          <div class="step-actor actor-both">QA + PM</div>
+          <div class="step-title">QA 驗收、Bug 回修</div>
+          <div class="step-desc">QA 測試、PM 審核結果。直到 sprint 結束、所有 ticket 驗收完成。</div>
         </div>
         <div class="step">
           <div class="step-num">4</div>
-          <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">轉 Story — AC 層次化 bullet (4 層)</div>
-          <div class="step-desc">
-            Summary：身為 [角色]，我想要 [功能]，以便於 [價值]。<br>
-            AC：明令不用 Given/When/Then；含「新增欄位連動檢查」規則（派車單匯出、訂單報表匯出要補欄位）。
-          </div>
-          <div class="step-tags"><span class="step-tag tag-claude">🤖 Claude</span></div>
-        </div>
-        <div class="step">
-          <div class="step-num">5</div>
-          <div class="step-actor actor-pm">PM 審閱</div>
-          <div class="step-title">人工審核（嚴禁直接開票）</div>
-          <div class="step-desc">把所有 Story 列在 Chat，等 PM 說「確認」或「OK」才建票。</div>
-        </div>
-        <div class="step">
-          <div class="step-num">6</div>
-          <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">查既有 Epic 當 Parent</div>
-          <div class="step-desc">能對應才帶 <code>parent_key</code>；判不出來整個欄位不帶（不要猜、不要 null）。</div>
-          <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira MCP</span></div>
-        </div>
-        <div class="step">
-          <div class="step-num">7</div>
-          <div class="step-actor actor-ai">AI 自動</div>
-          <div class="step-title">建 Jira Story（description 直接帶 ADF）</div>
-          <div class="step-desc">一次 call 完成：情境（粗體+底線）+ 巢狀 bulletList（4 層）對應 AC。</div>
-          <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira MCP</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bridge -->
-    <div class="bridge">
-      <div class="bridge-icon">🔄</div>
-      <div class="bridge-content">
-        <div class="bridge-title">Sprint 開發過程 · AC 多次人工調整</div>
-        <div class="bridge-desc">
-          開發進行中，PM 會因實際情境、技術限制、客戶回饋等原因，多次手動修訂 Jira Story 的 AC 與描述
-          （mcp-atlassian 沒有 update issue 工具 → 用 curl PUT 打 Jira REST API 塞 ADF）。
-          待 AC 定稿後才將最終版本回寫 PRD。
-        </div>
-        <div class="bridge-tags">
-          <span class="step-tag tag-jira">🎫 Jira Iteration</span>
-          <span class="step-tag tag-pm">🧑 PM 手動調整</span>
+          <div class="step-actor actor-pm">PM 確認</div>
+          <div class="step-title">Sprint 驗收完成 → 進下一階段</div>
+          <div class="step-desc">所有 ticket AC 定稿、驗收 OK 後，才進 Phase 3 Spec Finalization（回寫 PRD）與 Phase 4 Release Note（通知）。</div>
         </div>
       </div>
     </div>
@@ -861,38 +967,41 @@
     <div class="phase-arrow">
       <svg width="40" height="40" viewBox="0 0 40 40">
         <defs>
-          <linearGradient id="arrow1b" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style="stop-color:#4facfe;stop-opacity:0.9"/>
+          <linearGradient id="arrow2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffd54f;stop-opacity:0.9"/>
             <stop offset="100%" style="stop-color:#4facfe;stop-opacity:0.9"/>
           </linearGradient>
         </defs>
-        <line x1="20" y1="4" x2="20" y2="30" stroke="url(#arrow1b)" stroke-width="2.5"/>
-        <polygon points="12,28 20,38 28,28" fill="url(#arrow1b)"/>
+        <line x1="20" y1="4" x2="20" y2="30" stroke="url(#arrow2)" stroke-width="2.5"/>
+        <polygon points="12,28 20,38 28,28" fill="url(#arrow2)"/>
       </svg>
     </div>
 
-    <!-- PHASE 2B: PRD -->
-    <div class="phase-block p2" id="phase-2b">
+    <!-- PHASE 3: Spec Finalization -->
+    <div class="phase-block p3" id="phase-3">
       <div class="phase-block-header">
         <div class="phase-icon-lg">📘</div>
         <div>
-          <div class="phase-badge">中期 B / During — 寫入 PRD</div>
-          <div class="phase-title">Spec Generator (回寫 PRD)</div>
+          <div class="phase-badge">中後期 / Post-Acceptance</div>
+          <div class="phase-title">Spec Finalization（驗收後寫入 PRD）</div>
         </div>
-        <div class="phase-project">Story&Spec_Generator/ · write-spec</div>
+        <div class="phase-project">Spec_Finalization/ · /write-spec · /write-spec-batch</div>
       </div>
 
       <div class="steps">
         <div class="step">
           <div class="step-num">1</div>
           <div class="step-actor actor-pm">PM 輸入</div>
-          <div class="step-title">觸發二選一（skill 開頭先判斷模式）</div>
+          <div class="step-title">觸發：兩個 skill 二選一</div>
           <div class="step-desc">
-            <b>🅰️ 單票模式</b>：訊息含 <code>DAAS-XXXX</code> URL 或 key<br>
-            <b>🅱️ 批次模式</b>：「整理規格寫入規格書」/「寫入 PRD」/「open sprint 的票寫入規格書」/「整個 sprint」<br>
-            兩者都不明確 → 直接問用戶
+            <b>🅰️ /write-spec（單票）</b>：訊息含 <code>DAAS-XXXX</code> URL 或 key<br>
+            <b>🅱️ /write-spec-batch（批次）</b>：「整理規格寫入規格書」/「寫入 PRD」/「open sprint 的票寫入規格書」<br>
+            <b>時機：sprint 驗收後</b>，非開發前 spec。
           </div>
-          <div class="step-tags"><span class="step-tag tag-claude">💬 skill: write-spec</span></div>
+          <div class="step-tags">
+            <span class="step-tag tag-claude">💬 /write-spec</span>
+            <span class="step-tag tag-claude">💬 /write-spec-batch</span>
+          </div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
@@ -900,7 +1009,7 @@
           <div class="step-title">讀 Jira ticket(s)</div>
           <div class="step-desc">
             <b>🅰️ 單票</b>：<code>jira_get_issue</code> 讀該票（fields: *all）。<br>
-            <b>🅱️ 批次</b>：若沒指定 Sprint → <code>jira_get_sprints_from_board</code>（board_id=38, state=active）取 openSprint 並向用戶確認「要寫入 Sprint X 的全部 ticket 嗎？」→ <code>jira_search</code> 完整分頁撈完；只保留 Story/Task（Bug 不寫 PRD）；排除 QA/設計/Infra/E2E/PRD 關鍵字。
+            <b>🅱️ 批次</b>：若沒指定 Sprint → 取 openSprint → <code>jira_search</code> 完整分頁撈完；只保留 Story/Task（Bug 不寫 PRD）；排除 QA/設計/Infra/E2E/PRD 關鍵字。
           </div>
           <div class="step-tags"><span class="step-tag tag-jira">🎫 Jira MCP</span></div>
         </div>
@@ -910,8 +1019,7 @@
           <div class="step-title">依產品線分組 + 整理 4 章節</div>
           <div class="step-desc">
             summary tag <code>[TMS]/[App]/[InstaTMS]</code> 分流對應 PRD Doc；無 tag → 單獨列出讓用戶決定。<br>
-            4 章節：功能概述 / 使用者價值 / 使用場景 / 功能列表。不含成功指標、UI/UX 要點。<br>
-            <b>🅱️ 批次</b>：每張 ticket 各自整理。
+            4 章節：功能概述 / 使用者價值 / 使用場景 / 功能列表。不含成功指標、UI/UX 要點。
           </div>
           <div class="step-tags"><span class="step-tag tag-claude">🤖 Claude</span></div>
         </div>
@@ -931,7 +1039,7 @@
           <div class="step-title">展示規劃 + 等待確認</div>
           <div class="step-desc">
             把整理好的完整內容 + 建議位置展示給用戶，等用戶確認後才寫入。<br>
-            <b>🅱️ 批次</b>：一次列出每張票要寫入哪份 PRD、哪個章節、寫入順序；用戶可逐張取消或修改，但只做一輪確認（不逐張各問）。
+            <b>🅱️ 批次</b>：一次列出每張票要寫入哪份 PRD、哪個章節、寫入順序；用戶可逐張取消或修改，但只做一輪確認。
           </div>
         </div>
         <div class="step">
@@ -940,8 +1048,7 @@
           <div class="step-title">自寫 Node 腳本寫入 PRD Doc</div>
           <div class="step-desc">
             用 <code>batchUpdate</code> API 精準定位；<b>禁用 MCP replaceText</b>；只能新增、不可移除。<br>
-            格式比照鄰近章節（HEADING_3/4、bold、bullet）。<br>
-            <b>🅱️ 批次</b>：同 PRD 內 reverse index order；跨 PRD 逐個 Doc 處理。
+            格式比照鄰近章節（HEADING_3/4、bold、bullet）。
           </div>
           <div class="step-tags"><span class="step-tag tag-gdocs">📄 Docs API</span></div>
         </div>
@@ -950,8 +1057,7 @@
           <div class="step-actor actor-ai">AI 自動</div>
           <div class="step-title">更新 Doc 頂部「版本紀錄檔案」表格</div>
           <div class="step-desc">
-            日期 / SP / 說明 / 異動人員；同 Sprint 已有條目用 <code>replaceAllText</code> 追加到現有列（不新增一列）。<br>
-            <b>🅱️ 批次</b>：每份 PRD 只新增/追加一筆，說明欄合併列出所有票號（例「新增 3.1.3.3 / 3.1.3.4（DAAS-6886, DAAS-6887）」）。
+            日期 / SP / 說明 / 異動人員；同 Sprint 已有條目用 <code>replaceAllText</code> 追加到現有列（不新增一列）。
           </div>
         </div>
         <div class="step">
@@ -960,28 +1066,38 @@
           <div class="step-title">驗證格式 + 清理暫時腳本</div>
           <div class="step-desc">再跑一次 gdocs-inspect + 詳細檢查 bold / bullet / heading 與鄰近既有章節一致，最後刪除本次產生的暫時腳本。</div>
         </div>
+        <div class="step">
+          <div class="step-num">＋</div>
+          <div class="step-actor actor-ai">周邊工具</div>
+          <div class="step-title">/openspec-* 工具鏈</div>
+          <div class="step-desc">
+            <code>/openspec-propose</code> · <code>/openspec-apply-change</code> · <code>/openspec-archive-change</code> · <code>/openspec-explore</code>
+            — 變更管理工具鏈，處理 spec 版本變更流程。
+          </div>
+          <div class="step-tags"><span class="step-tag tag-openspec">⚙️ openspec</span></div>
+        </div>
       </div>
     </div>
 
     <div class="phase-arrow">
       <svg width="40" height="40" viewBox="0 0 40 40">
         <defs>
-          <linearGradient id="arrow2" x1="0%" y1="0%" x2="0%" y2="100%">
+          <linearGradient id="arrow3" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" style="stop-color:#4facfe;stop-opacity:0.9"/>
             <stop offset="100%" style="stop-color:#43e97b;stop-opacity:0.9"/>
           </linearGradient>
         </defs>
-        <line x1="20" y1="4" x2="20" y2="30" stroke="url(#arrow2)" stroke-width="2.5"/>
-        <polygon points="12,28 20,38 28,28" fill="url(#arrow2)"/>
+        <line x1="20" y1="4" x2="20" y2="30" stroke="url(#arrow3)" stroke-width="2.5"/>
+        <polygon points="12,28 20,38 28,28" fill="url(#arrow3)"/>
       </svg>
     </div>
 
-    <!-- PHASE 3 -->
-    <div class="phase-block p3" id="phase-3">
+    <!-- PHASE 4: Release Note -->
+    <div class="phase-block p4" id="phase-4">
       <div class="phase-block-header">
         <div class="phase-icon-lg">🚀</div>
         <div>
-          <div class="phase-badge">後期 / After — Release</div>
+          <div class="phase-badge">後期 / Release</div>
           <div class="phase-title">TMS Release Note</div>
         </div>
         <div class="phase-project">TMS_Release_Note/ · release-note</div>
@@ -1070,32 +1186,33 @@
     <div class="summary-card">
       <div class="summary-title">🧑 PM 介入的關鍵節點</div>
       <ul class="summary-list">
-        <li>口頭輸入客戶需求 → 啟動 Proposal</li>
-        <li>釐清需求（一次一題）+ 選定三方案</li>
-        <li>Story 草稿審核（嚴禁直接開票）</li>
-        <li>Sprint 中 AC 多次手動調整（curl 塞 ADF）</li>
-        <li>PRD 寫入確認：單票 / Sprint 整批</li>
-        <li>Release Note draft.md 用字調整</li>
+        <li>起點：客戶案 /shape-proposal vs 產品化題目（直接討論）</li>
+        <li>釐清需求（一次一題）+ 方案審核</li>
+        <li>客戶案：等簽約後才繼續 /kickoff-from-proposal</li>
+        <li>建票前列 Story 審核（嚴禁直接開票）</li>
+        <li>Sprint 中 AC 多次 curl PUT 手動調整</li>
+        <li>驗收後：/write-spec（單票）或 /write-spec-batch（批次）寫入確認</li>
+        <li>Release Note：draft.md 用字調整 → 說「寫入」</li>
       </ul>
     </div>
     <div class="summary-card">
-      <div class="summary-title">🤖 AI 自動化的重點範圍</div>
+      <div class="summary-title">🤖 AI 自動化範圍</div>
       <ul class="summary-list">
-        <li>並行抓資料（Drive / PRD / Codebase）</li>
-        <li>需求合併 + 既有實作比對（已完成/可複用/全新）</li>
+        <li>並行抓資料（Drive / PRD / Codebase / Figma）</li>
+        <li>客戶案：三方案產出 + 合作案回寫</li>
+        <li>產品化題目：PM 提供資料 → 共同討論形塑</li>
         <li>Jira 建票 description 直接帶 ADF（一次 call）</li>
         <li>PRD 寫入用 Docs REST API（禁 MCP replaceText）</li>
-        <li>Release Note 自動分頁撈、自動寫 Doc、自動通知 Chat</li>
+        <li>Release Note 自動分頁撈、寫 Doc、通知 Chat</li>
       </ul>
     </div>
     <div class="summary-card">
-      <div class="summary-title">🔄 三階段資料流向</div>
+      <div class="summary-title">🔄 四階段資料流向</div>
       <ul class="summary-list">
-        <li>前期：需求 + 合作案 + Codebase + PRD → 合作案表格 / Jira Story</li>
-        <li>中期 A：合作案「客製化功能」表 → Jira Story（ADF）</li>
-        <li>Sprint：Jira AC 反覆調整（curl PUT）</li>
-        <li>中期 B：Jira ticket / Sprint → 回寫 PRD（TMS/App/InstaTMS）</li>
-        <li>後期：openSprints → Release Note Doc + Chat 通知</li>
+        <li>P1 Shape &amp; Kickoff：需求 + 合作案 + Codebase → 方案 / Jira Story</li>
+        <li>P2 Sprint：AC 反覆調整（curl PUT 塞 ADF）→ 驗收完成</li>
+        <li>P3 Spec Finalization：驗收 Ticket → PRD（TMS/App/InstaTMS）</li>
+        <li>P4 Release Note：openSprints → Doc + Chat 通知</li>
       </ul>
     </div>
   </div>
