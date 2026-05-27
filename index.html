@@ -29,8 +29,29 @@
   .subtitle {
     font-size: 1rem;
     color: #aaa;
-    margin-bottom: 48px;
+    margin-bottom: 18px;
     text-align: center;
+  }
+  .report-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 48px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    background: rgba(79,172,254,0.18);
+    border: 1px solid rgba(79,172,254,0.45);
+    box-shadow: 0 10px 28px rgba(79,172,254,0.12);
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  }
+  .report-link:hover {
+    transform: translateY(-2px);
+    background: rgba(79,172,254,0.28);
+    border-color: rgba(79,172,254,0.75);
   }
   /* ======== View system ======== */
   .view { display: none; width: 100%; flex-direction: column; align-items: center; }
@@ -543,6 +564,7 @@
 <div id="overview-view" class="view active">
   <h1>PM Workflow / AI 工具鏈</h1>
   <p class="subtitle">從提案到交付，四個階段貫穿 PM 工作 · 點擊卡片查看詳細流程</p>
+  <a class="report-link" href="report-center/">查看新版 PM Workflow Report ↗</a>
 
   <div class="timeline">
 
