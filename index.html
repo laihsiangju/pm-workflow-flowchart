@@ -410,6 +410,61 @@
             border-bottom: none;
         }
 
+        .comparison-table {
+            table-layout: fixed;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            vertical-align: top;
+        }
+
+        .comparison-table th:nth-child(1) {
+            width: 13%;
+        }
+
+        .comparison-table th:nth-child(2),
+        .comparison-table th:nth-child(3),
+        .comparison-table th:nth-child(4),
+        .comparison-table th:nth-child(5) {
+            width: 21.75%;
+        }
+
+        .conclusion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .conclusion-card {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            padding: 18px;
+        }
+
+        .conclusion-card h3 {
+            color: #667eea;
+            font-size: 1.05em;
+            margin-bottom: 8px;
+        }
+
+        .conclusion-card p {
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .one-line-summary {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            border-radius: 8px;
+            color: #2e7d32;
+            font-weight: 700;
+            margin-top: 20px;
+            padding: 18px 20px;
+        }
+
         .tag {
             display: inline-block;
             padding: 4px 8px;
@@ -517,6 +572,16 @@
             .flow-diagram {
                 overflow-x: scroll;
                 padding: 20px;
+            }
+
+            .tool-table {
+                display: block;
+                overflow-x: auto;
+                white-space: normal;
+            }
+
+            .comparison-table {
+                min-width: 980px;
             }
 
             .workflow-section {
@@ -940,6 +1005,94 @@
                 </div>
             </div>
 
+            <!-- AI 導入前後差異 -->
+            <section class="workflow-section">
+                <h2>
+                    <span class="stage-number">AI</span>
+                    AI 導入前後差異
+                </h2>
+
+                <div class="stage-description">
+                    <strong>範圍：</strong> 聚焦 PM 前期規劃與文件產出；工程溝通、會議記錄、測試驗收先不納入，回饋分析留待下一階段。
+                </div>
+
+                <table class="tool-table comparison-table">
+                    <thead>
+                        <tr>
+                            <th>階段</th>
+                            <th>導入 AI 前</th>
+                            <th>導入 AI 後</th>
+                            <th>前後差異</th>
+                            <th>工時變化</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>需求收集</strong></td>
+                            <td>PM 人工讀取並收集資料。</td>
+                            <td>PM 仍需人工收集；AI 作為討論角色。</td>
+                            <td>AI 不取代資料收集，只輔助討論與整理想法。</td>
+                            <td>維持。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>需求釐清</strong></td>
+                            <td>依 domain knowledge 列問題。</td>
+                            <td>AI 補澄清問題、情境與例外。</td>
+                            <td>討論更完整，較不易漏情境。</td>
+                            <td>前期可能略增，後續減少返工。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PRD / Spec 撰寫</strong></td>
+                            <td>PM 從零撰寫文件。</td>
+                            <td>AI 產初稿，PM 審稿與修正。</td>
+                            <td>文件更快產出，結構更一致。</td>
+                            <td>初稿時間大幅縮短。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>User Story 拆解</strong></td>
+                            <td>PM 手動拆 scope 與 AC。</td>
+                            <td>AI 輔助拆 story、補 AC 與依賴。</td>
+                            <td>更快形成可討論版本。</td>
+                            <td>通常縮短；需人工收斂 scope。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>設計溝通</strong></td>
+                            <td>PM 以文字或簡單 wireframe 溝通需求。</td>
+                            <td>AI 輔助流程圖、wireframe、prototype 草稿。</td>
+                            <td>需求更具體，降低理解落差。</td>
+                            <td>準備時間可能略增，但減少來回確認。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>排程與優先級</strong></td>
+                            <td>依公司目標做開發排序。</td>
+                            <td>仍依公司目標做開發排序。</td>
+                            <td>AI 沒有實質影響。</td>
+                            <td>工時差異不大。</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="conclusion-grid">
+                    <div class="conclusion-card">
+                        <h3>主要節省時間</h3>
+                        <p>需求整理、PRD / Spec 初稿、User Story 初稿。</p>
+                    </div>
+                    <div class="conclusion-card">
+                        <h3>可能增加時間</h3>
+                        <p>需求釐清與設計溝通會多一些審視與取捨。</p>
+                    </div>
+                    <div class="conclusion-card">
+                        <h3>工作重心轉移</h3>
+                        <p>從手動整理與撰寫，轉向判斷、審稿、收斂。</p>
+                    </div>
+                    <div class="conclusion-card">
+                        <h3>決策方式不變</h3>
+                        <p>排程與優先級仍依公司目標與人工判斷。</p>
+                    </div>
+                </div>
+
+            </section>
+
             <!-- 外部工具與認證 -->
             <div style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e9ecef;">
                 <h2 style="color: #333; margin-bottom: 20px;">🛠️ 外部工具與認證</h2>
@@ -1064,10 +1217,7 @@
         </div>
 
         <footer>
-            <p>PM Workflow Report | 最後更新：2026-05-27 | 涵蓋 Shape Kickoff、Spec Finalization、TMS Release Note</p>
-            <p style="margin-top: 10px; font-size: 0.9em;">
-                📌 本報告展示完整的端到端工作流程。詳細的 skill 定義與執行邏輯存儲在各專案的 CLAUDE.md 與 .claude/skills/ 目錄。
-            </p>
+            <p>最後更新：2026-05-28</p>
         </footer>
     </div>
     <script>
@@ -1085,6 +1235,52 @@
             "版本發布": "Release Publishing",
             "已全自動化，每兩週 Sprint Demo 後自動發布與通知": "Fully automated: published and announced after the biweekly Sprint Demo",
             "📌 核心 Skills 一覽": "📌 Core Skills",
+            "AI 導入前後差異": "Before and After AI Adoption",
+            "範圍：": "Scope:",
+            "聚焦 PM 前期規劃與文件產出；工程溝通、會議記錄、測試驗收先不納入，回饋分析留待下一階段。": "Focuses on early PM planning and document production. Engineering communication, meeting notes, and testing/acceptance are excluded for now; feedback analysis is left for the next phase.",
+            "階段": "Stage",
+            "導入 AI 前": "Before AI",
+            "導入 AI 後": "After AI",
+            "前後差異": "Difference",
+            "工時變化": "Time impact",
+            "需求收集": "Requirement Collection",
+            "PM 人工讀取並收集資料。": "PM manually reads and collects materials.",
+            "PM 仍需人工收集；AI 作為討論角色。": "PM still collects materials manually; AI acts as a discussion partner.",
+            "AI 不取代資料收集，只輔助討論與整理想法。": "AI does not replace data collection; it only supports discussion and idea organization.",
+            "維持。": "No major change.",
+            "需求釐清": "Requirement Clarification",
+            "依 domain knowledge 列問題。": "Questions are based on domain knowledge.",
+            "AI 補澄清問題、情境與例外。": "AI adds clarification questions, scenarios, and exceptions.",
+            "討論更完整，較不易漏情境。": "Discussion becomes more complete with fewer missed scenarios.",
+            "前期可能略增，後續減少返工。": "May increase slightly upfront, but reduces later rework.",
+            "PRD / Spec 撰寫": "PRD / Spec Writing",
+            "PM 從零撰寫文件。": "PM writes documents from scratch.",
+            "AI 產初稿，PM 審稿與修正。": "AI drafts; PM reviews and revises.",
+            "文件更快產出，結構更一致。": "Documents are produced faster with a more consistent structure.",
+            "初稿時間大幅縮短。": "Drafting time is significantly reduced.",
+            "User Story 拆解": "User Story Breakdown",
+            "PM 手動拆 scope 與 AC。": "PM manually breaks down scope and AC.",
+            "AI 輔助拆 story、補 AC 與依賴。": "AI helps split stories and add AC and dependencies.",
+            "更快形成可討論版本。": "Faster to create a discussion-ready version.",
+            "通常縮短；需人工收斂 scope。": "Usually shorter; scope still needs human consolidation.",
+            "設計溝通": "Design Communication",
+            "PM 以文字或簡單 wireframe 溝通需求。": "PM communicates requirements with text or simple wireframes.",
+            "AI 輔助流程圖、wireframe、prototype 草稿。": "AI helps with flowcharts, wireframes, and prototype drafts.",
+            "需求更具體，降低理解落差。": "Requirements become more concrete, reducing gaps in understanding.",
+            "準備時間可能略增，但減少來回確認。": "Preparation may increase slightly, but reduces back-and-forth.",
+            "排程與優先級": "Scheduling and Priority",
+            "依公司目標做開發排序。": "Development priority follows company goals.",
+            "仍依公司目標做開發排序。": "Development priority still follows company goals.",
+            "AI 沒有實質影響。": "AI has no substantial impact.",
+            "工時差異不大。": "Little time difference.",
+            "主要節省時間": "Main Time Savings",
+            "需求整理、PRD / Spec 初稿、User Story 初稿。": "Requirement organization, PRD / Spec drafts, and User Story drafts.",
+            "可能增加時間": "Possible Time Increase",
+            "需求釐清與設計溝通會多一些審視與取捨。": "Requirement clarification and design communication require more review and trade-off decisions.",
+            "工作重心轉移": "Work Focus Shift",
+            "從手動整理與撰寫，轉向判斷、審稿、收斂。": "Shifts from manual organization and writing to judgment, review, and consolidation.",
+            "決策方式不變": "Decision-Making Stays Human",
+            "排程與優先級仍依公司目標與人工判斷。": "Scheduling and priority still follow company goals and human judgment.",
             "目標：": "Goal:",
             "完成後：": "After completion:",
             "從客戶需求釐清到提案產出。支援兩種情境：客戶案（讀合作案文件）與內部案（直接討論），透過需求分析、功能匹配、三方案比較，產出結構化提案。": "Clarify customer requirements and produce proposals. Supports customer cases from cooperation documents and internal cases from direct discussion, then uses requirement analysis, feature matching, and three-solution comparison to produce a structured proposal.",
@@ -1212,8 +1408,7 @@
             "執行 /write-spec-batch（定期，Sprint 末）": "Run /write-spec-batch at the end of the Sprint.",
             "每兩週 Sprint Demo 後：": "After the biweekly Sprint Demo:",
             "自動執行 /release-note（自動化撈票、分類、寫 doc、推送通知）": "Automatically run /release-note to pull tickets, classify them, write the doc, and send notifications.",
-            "PM Workflow Report | 最後更新：2026-05-27 | 涵蓋 Shape Kickoff、Spec Finalization、TMS Release Note": "PM Workflow Report | Last updated: 2026-05-27 | Covers Shape Kickoff, Spec Finalization, and TMS Release Note",
-            "📌 本報告展示完整的端到端工作流程。詳細的 skill 定義與執行邏輯存儲在各專案的 CLAUDE.md 與 .claude/skills/ 目錄。": "📌 This report presents the complete end-to-end workflow. Detailed skill definitions and execution logic are stored in each project's CLAUDE.md and .claude/skills/ directories."
+            "最後更新：2026-05-28": "Last updated: 2026-05-28"
         };
 
         const originalText = new WeakMap();
